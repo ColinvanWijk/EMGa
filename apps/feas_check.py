@@ -161,7 +161,7 @@ def feasibility_check(username, portf, bids):
 
     # Define the Solver
     solver = SolverFactory('glpk')  # couenne
-    solver.options['print_level'] = 0
+    #solver.options['print_level'] = 0
 
 
     # Solve
@@ -304,7 +304,7 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
 
     # Define the Solver
     solver = SolverFactory('glpk')  # couenne
-    solver.options['print_level'] = 0
+    #solver.options['print_level'] = 0
 
     # Solve
     solver.solve(model, tee=True)
