@@ -160,7 +160,7 @@ def feasibility_check(username, portf, bids):
     model.SOC_end = Constraint(model.S, model.T, rule=SOC_end_rule)
 
     # Define the Solver
-    solver = SolverFactory('ipopt')  # couenne
+    solver = SolverFactory('glpk')  # couenne
     solver.options['print_level'] = 0
 
 
@@ -280,7 +280,7 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
 
     def cost_rule(model,i):
         if i == 0:
-            return (model.cost[i,d] == a_thermal*model.flex[i,d]**2 + b_thermal*model.flex[i,d] + c_thermal)
+            return (model.cost[i,d] == a_thermal*model.flex[i,d] + b_thermal*model.flex[i,d] + c_thermal)
         else:
             return (model.cost[i,d] == 0.0)
     model.cost_constr = Constraint(model.S, rule=cost_rule)
@@ -303,7 +303,7 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
     model.maxP_constr = Constraint(model.S, rule=maxP_rule)
 
     # Define the Solver
-    solver = SolverFactory('ipopt')  # couenne
+    solver = SolverFactory('glpk')  # couenne
     solver.options['print_level'] = 0
 
     # Solve
