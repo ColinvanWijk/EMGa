@@ -280,7 +280,7 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
 
     def cost_rule(model,i):
         if i == 0:
-            return (model.cost[i,d] == a_thermal*model.flex[i,d] + b_thermal*model.flex[i,d] + c_thermal)
+            return (model.cost[i,d] == a_thermal*model.flex[i,d] + b_thermal*model.flex[i,d] + c_thermal) # *model.flex[i,d]**2
         else:
             return (model.cost[i,d] == 0.0)
     model.cost_constr = Constraint(model.S, rule=cost_rule)
