@@ -58,7 +58,70 @@ layout = html.Div([
 
         dbc.Row([
 
-        ], style={'height': '3vw'}, justify="start"),
+        ], style={'height': '1.5vw'}, justify="start"
+        ),
+
+
+        dbc.Row([
+
+            ####################
+            html.Div(
+                [
+                    dbc.Button("Instructions", id="open-lg", className="button-primary",
+                               style={'font-size': '1.0vw', 'height': '2vw', 'width': '10vw',
+                                      'textAlign': 'center'},
+                               ),
+
+                    dbc.Modal(
+                        [
+                            dbc.ModalHeader("Portfolio Instructions:"),
+                            dbc.ModalBody([
+                                html.P(
+                                    dcc.Markdown(
+                                        "**1)** Select the energy resources in your Portfolio."
+
+                                    ),
+                                ),
+                                html.P(
+                                    dcc.Markdown(
+                                        "**2)** Use the slider to set the installed **Capacity** of each energy resource."
+                                    )
+                                ),
+                                html.P(
+                                    dcc.Markdown(
+                                        "**3)** Mantain your **Investmen Cost** within 98% and 100%."
+                                    )
+                                ),
+                                html.P(
+                                    dcc.Markdown(
+                                        "**4)** Click on the **Continue** button when ready."
+                                    )
+                                ),
+
+                            ]),
+                            dbc.ModalFooter(
+                                dbc.Button("Got it!", id="close-lg", className="button-primary",
+                                           style={'font-size': '1.0vw', 'height': '2vw', 'width': '10vw',
+                                                  'textAlign': 'center'},
+                                           )
+                            ),
+                        ],
+                        id="modal-lg",
+                        size="lg",
+                    ),
+
+                ]
+            ),
+            ####################
+
+
+        ], style={'height': '3vw'}, justify="center"
+        ),
+
+        dbc.Row([
+
+        ], style={'height': '1.5vw'}, justify="start"
+        ),
 
         dbc.Row(
             # Characteristics generation technologies
@@ -1237,3 +1300,28 @@ def energy_cap_th(value):
     else:
         return True
 
+############################
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
+
+
+# app.callback(
+#     Output("modal-sm", "is_open"),
+#     [Input("open-sm", "n_clicks"), Input("close-sm", "n_clicks")],
+#     [State("modal-sm", "is_open")],
+# )(toggle_modal)
+
+app.callback(
+    Output("modal-lg", "is_open"),
+    [Input("open-lg", "n_clicks"), Input("close-lg", "n_clicks")],
+    [State("modal-lg", "is_open")],
+)(toggle_modal)
+
+# app.callback(
+#     Output("modal-xl", "is_open"),
+#     [Input("open-xl", "n_clicks"), Input("close-xl", "n_clicks")],
+#     [State("modal-xl", "is_open")],
+# )(toggle_modal)
+############################
