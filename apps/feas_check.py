@@ -186,8 +186,8 @@ def feasibility_check(username, portf, bids):
            # print('{:>16.6f}'.format(model.rho_plus[i,t].value), end=" ")
            # print('{:>16.6f}'.format(model.rho_minus[i,t].value), end=" ")
            # print('{:>16.6f}'.format(model.SOC[i,t].value*100))
-           total_inf[t] = total_inf[t] + model.phi_plus[i,t].value + model.phi_minus[i,t].value + model.zeta_plus[i,t].value \
-                        + model.zeta_minus[i,t].value + model.rho_plus[i,t].value*model.Pnom[i].value + model.rho_minus[i,t].value*model.Pnom[i].value
+           total_inf[t] = total_inf[t] - model.phi_plus[i,t].value + model.phi_minus[i,t].value - model.zeta_plus[i,t].value \
+                        + model.zeta_minus[i,t].value - model.rho_plus[i,t].value*model.Pnom[i].value + model.rho_minus[i,t].value*model.Pnom[i].value
            phi_plus[t] = phi_plus[t] + model.phi_plus[i,t].value
            phi_minus[t] = phi_minus[t] + model.phi_plus[i,t].value
            zeta_plus[t] = zeta_plus[t] + model.zeta_plus[i,t].value
@@ -225,9 +225,13 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
 
     T = range(24)
     S = range(4)
+    B = range(20)   # Number of blocks of piecewise linearization
 
     model.T = Set(ordered=True, initialize=T)  # Set of time periods
     model.S = Set(ordered=True, initialize=S)  # Set of energy sources of portfolio
+    model.B = Set(ordered=True, initialize=B)  # Set of energy sources of portfolio
+
+
 
 
     Flex_max = {S[i]: constraints.iloc[0, i]*app.flex_th for i in S}
@@ -240,6 +244,11 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
     Price_plus = {T[t]: ubpr_pos.iloc[t] for t in T}
     Price_neg = {T[t]: ubpr_neg.iloc[t] for t in T}
     Enom = {(S[i], T[t]): bids.iloc[t, i] for i in S for t in T}
+
+
+    delta_P, mP = piece_wise(Flex_max, B)
+
+    print(mP[0][1])
 
 
     model.Flex_max = Param(model.S, initialize=Flex_max, mutable=True)  # Max power
@@ -257,6 +266,12 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
 
     model.flex = Var(model.S, model.T, initialize=0, within=NonNegativeReals)  #  , bounds=(0,50) Acive power flowing in lines
     model.cost = Var(model.S, model.T, initialize=0, within=NonNegativeReals)  # Acive power flowing in lines
+
+    model.flex_sqr_p = Var(model.S, model.T, initialize=0, within=NonNegativeReals)  #  , bounds=(0,50) Acive power flowing in lines
+    model.flex_sqr_n = Var(model.S, model.T, initialize=0, within=NonNegativeReals)  # , bounds=(0,50) Acive power flowing in lines
+    model.flex_delta = Var(model.S, model.B, model.T, initialize=0, within=NonNegativeReals)  #  , bounds=(0,50) Acive power flowing in lines
+
+
 
     # t = 1
 
@@ -280,7 +295,7 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
 
     def cost_rule(model,i):
         if i == 0:
-            return (model.cost[i,d] == a_thermal*model.flex[i,d] + b_thermal*model.flex[i,d] + c_thermal) # *model.flex[i,d]**2
+            return (model.cost[i,d] == a_thermal*((sum(mP[i,b] * model.flex_delta[i, b, d]  for b in model.B))) + b_thermal*model.flex[i,d] + c_thermal) # *model.flex[i,d]**2   $  (sum(mP[i,b] * model.flex_delta[i, b, d]  for b in model.B))
         else:
             return (model.cost[i,d] == 0.0)
     model.cost_constr = Constraint(model.S, rule=cost_rule)
@@ -302,6 +317,29 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
         #     return (0,model.flex[i,d],0)
     model.maxP_constr = Constraint(model.S, rule=maxP_rule)
 
+
+    ############### Linearization of P**2 for cost #####################
+
+    def pw_lin1_rule(model,i):
+        return (model.flex_sqr_p[i,d] - model.flex_sqr_n[i,d] == model.flex[i,d])
+    model.pw_lin1 = Constraint(model.S, rule=pw_lin1_rule)
+
+    def pw_lin2_rule(model,i):
+        return (model.flex_sqr_p[i,d] + model.flex_sqr_n[i,d] == sum(model.flex_delta[i,b,d] for b in model.B))
+    model.pw_lin2 = Constraint(model.S, rule=pw_lin2_rule)
+
+    def pw_lin3_rule(model,i,b):
+        return (model.flex_delta[i,b,d] <= delta_P[i,0])
+    model.pw_lin3 = Constraint(model.S, model.B, rule=pw_lin3_rule)
+
+    def pw_lin4_rule(model,i,b):
+        if b > 1:
+            return (model.flex_delta[i,b,d] <= model.flex_delta[i,b-1,d])
+        else:
+            return (model.flex_delta[i,b,d] == model.flex_delta[i,b,d])
+    model.pw_lin4 = Constraint(model.S, model.B, rule=pw_lin4_rule)
+
+
     # Define the Solver
     solver = SolverFactory('glpk')  # couenne
     #solver.options['print_level'] = 0
@@ -309,4 +347,22 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
     # Solve
     solver.solve(model, tee=True)
 
+
     return model
+
+
+def piece_wise(max_P, B):
+    # Corrente fase a
+    # B = range(20)   # Number of blocks of piecewise linearization
+    S = range(4)    # Number of energy sources
+    deltaIa = np.zeros((len(S),1))
+    mIa = np.zeros((len(S),len(B)))
+    for i in S:
+        deltaIa[i] = max_P[i] / len(B)
+        for b in B :
+            if (b == 1) :
+                mIa[i, b] = (5 / 6) * deltaIa[i]
+            if (b > 1) :
+                mIa[i, b] = (2 * b - 1) * deltaIa[i]
+
+    return deltaIa, mIa

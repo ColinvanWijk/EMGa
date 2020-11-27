@@ -299,7 +299,8 @@ def display_graph(nome):
 
         realp = (fact[fact.columns[b2 + 1]]) + realp_pv.array + therm_bid.array + storage_bid.array # * float(P_value)
 
-        flexibility = therm_bid * flex_th / 100 + storage_bid * flex_storage / 100
+
+        flexibility = portf[0][2]*app.flex_th*np.ones(np.shape(therm_bid))#therm_bid * flex_th / 100 + storage_bid * flex_storage / 100
 
         figure = go.Figure()
         figure.add_trace(go.Bar(
@@ -363,12 +364,18 @@ def display_graph(nome):
         imb_1 = unb.array - tot_inf.iloc[:, 0]
 
         flexib = np.zeros((len(realp),1))
+        cost = np.zeros((len(realp),1))
 
         #########################
         for t in range(24):
             a = feas_check.redispatch(portf, imb_1, ubpr_pos[ubpr_pos.columns[b2 + 1]] * pr[pr.columns[b2 + 1]], ubpr_neg[ubpr_neg.columns[b2 + 1]] * pr[pr.columns[b2 + 1]], t, df)
 
             flexib[t] = a.flex[0, t].value
+            cost[t] = a.cost[0, t].value
+
+
+
+
 
             # print(a.flex[0,t].value)
             #
@@ -393,21 +400,21 @@ def display_graph(nome):
         for i in range(len(realp)):
 
 
-            if -flexibility.iloc[i] <= unb_no_flex[i] <= flexibility.iloc[i]:
+            if -flexibility[i] <= unb_no_flex[i] <= flexibility[i]:
                 unb[i] = 0.0
-            elif unb_no_flex[i] < -flexibility.iloc[i]:
+            elif unb_no_flex[i] < -flexibility[i]:
                 unb[i] = (realp.iloc[i] + a.flex[0,i].value) - total_bid.iloc[i]
-            elif unb_no_flex[i] > flexibility.iloc[i]:
+            elif unb_no_flex[i] > flexibility[i]:
                 unb[i] = realp.iloc[i] - a.flex[0,i].value - total_bid.iloc[i]
 
 
             if unb[i] >= 0.0:
                 act_prices[i] = (unb[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])
-                act_prices_feas[i] = (unb.array[i] - tot_inf.iloc[i,0]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])
+                act_prices_feas[i] = (unb.array[i] - (tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])  - cost.iloc[i]
 
             else:
                 act_prices[i] = unb[i] * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1])
-                act_prices_feas[i] = (unb.array[i] - tot_inf.iloc[i,0]) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1])
+                act_prices_feas[i] = (unb.array[i] - (tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) - cost.iloc[i]
 
             act_prices = pd.DataFrame(act_prices)
             act_prices_feas = pd.DataFrame(act_prices_feas)
@@ -425,7 +432,7 @@ def display_graph(nome):
             data=[dict(x=df[df.columns[0]], y=total_bid * pr[pr.columns[b2 + 1]].array, type='bar',
                        name='Expected',
                        marker=dict(color=app.color_3)),
-                  dict(x=df[df.columns[0]], y=(act_prices.iloc[0,:]), type='bar', name='Inb. Income',
+                  dict(x=df[df.columns[0]], y=(act_prices.iloc[0,:]), type='bar', name='Imb. Income',
                        marker=dict(color=app.color_bar2),
                        textfont_color=app.color_3,
                        ),
