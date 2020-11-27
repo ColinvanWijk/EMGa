@@ -410,11 +410,11 @@ def display_graph(nome):
 
             if unb[i] >= 0.0:
                 act_prices[i] = (unb[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])
-                act_prices_feas[i] = (unb.array[i] - (tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])  - cost.iloc[i]
+                act_prices_feas[i] = (unb.array[i] - (tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])  #- cost.iloc[i]
 
             else:
                 act_prices[i] = unb[i] * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1])
-                act_prices_feas[i] = (unb.array[i] - (tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) - cost.iloc[i]
+                act_prices_feas[i] = (unb.array[i] - (tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) #- cost.iloc[i]
 
             act_prices = pd.DataFrame(act_prices)
             act_prices_feas = pd.DataFrame(act_prices_feas)
