@@ -35,7 +35,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
                 meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}])
 
 
-app.database_url = 'Local'#'Server' # 'Local'
+app.database_url = 'Server'#' # 'Local'
 play_days = 10 # Define the number of days to be played
 
 Number_WT = 1
