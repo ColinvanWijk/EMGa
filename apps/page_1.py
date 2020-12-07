@@ -184,12 +184,6 @@ layout = html.Div([
                         ], style={'textAlign': 'center'}),
                     ], width=3, lg=3, md=3, sm=3),
 
-                    # dbc.Col([
-                    #
-                    #     html.Div([
-                    #         # buttons.download_data(),
-                    #     ], style={'textAlign': 'center'}),
-                    # ], width=1, lg=1, md=1, sm=1),
 
                     dbc.Col([
                         html.Div([
@@ -198,11 +192,42 @@ layout = html.Div([
                     ], width=3, lg=3, md=3, sm=3),
 
                     # dbc.Col([
-                    #
                     #     html.Div([
                     #         buttons.download_irrad(),
                     #     ], style={'textAlign': 'center'}),
-                    # ], width=2, lg=2, md=2, sm=2),
+                    # ], width=3, lg=3, md=3, sm=3),
+
+                ], style={'height': '10vw'}, justify="between"
+            ),
+
+            dbc.Row(
+                [
+                    dbc.Col([
+                        # score_info.self_score(),
+
+                    ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3}),
+
+
+
+                    dbc.Col([
+
+                        html.Div([
+                            buttons.imb_factors(),
+                        ], style={'textAlign': 'center'}),
+                    ], width=5, lg=5, md=5, sm=5),
+
+                    dbc.Col([
+                        html.Div([
+                            # dcc.Loading([
+                            html.Div([
+                                buttons.port_info(),
+                            ], ),
+                            # ],id='loading_port', color=app.color_3, type='default'),
+
+                        ], )
+                    ], width=5, lg=5, md=5, sm=5, style={'textAlign': 'center'}),
+
+
 
                 ], style={'height': '10vw'}, justify="between"
             ),
@@ -238,18 +263,18 @@ layout = html.Div([
                             # style={'marginTop': '7vw', 'marginLeft': '28vw'}
                         ),  #
 
-                    ], width=4, lg=4, md=4, sm=4, style={'textAlign': 'center'}),
+                    ], width=7, lg=7, md=7, sm=7, style={'textAlign': 'center'}),
 
-                    dbc.Col([
-                        html.Div([
-                            # dcc.Loading([
-                                html.Div([
-                                    buttons.port_info(),
-                                ], style={'height': '1vw'},),
-                            # ],id='loading_port', color=app.color_3, type='default'),
-
-                        ], style={'marginTop': '7vw'})
-                    ], width=3, lg=3, md=3, sm=3, style={'textAlign': 'center'}),
+                    # dbc.Col([
+                    #     html.Div([
+                    #         # dcc.Loading([
+                    #             html.Div([
+                    #                 buttons.port_info(),
+                    #             ], style={'height': '1vw'},),
+                    #         # ],id='loading_port', color=app.color_3, type='default'),
+                    #
+                    #     ], style={'marginTop': '7vw'})
+                    # ], width=3, lg=3, md=3, sm=3, style={'textAlign': 'center'}),
 
                 ], style={'height': '20vw'},
             ),
@@ -456,6 +481,12 @@ def display_confirm(contents, filename):
 
         if df is not None:
 
+            # df = df.apply(pd.to_numeric, errors='coerce')
+            #
+            # df = df.fillna(0)
+
+
+
             df_1 = df.to_json()
             dash.callback_context.response.set_cookie('ddf', str(df_1), max_age=7200)
 
@@ -526,6 +557,10 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
         df = parse_contents(contents, filename)
 
         if df is not None:
+
+            # df = df.apply(pd.to_numeric, errors='coerce')
+            #
+            # df = df.fillna(0)
 
             if (len(df.axes[1]) == 5) and (len(df.axes[0]) == 24):
                 col = {
@@ -654,6 +689,10 @@ def update_texts(contents, P_value, clicks, ok_button, filename):
 
         if df is not None:
 
+            # df = df.apply(pd.to_numeric, errors='coerce')
+            #
+            # df = df.fillna(0)
+
             if (len(df.axes[1]) == 5) and (len(df.axes[0]) == 24):
                 prompt = 'Click SUBMIT to Continue'
                 col = {'color': app.color_line, 'font-size': '1.2vw', 'textAlign': 'center'}
@@ -699,6 +738,9 @@ def update_filename(contents, P_value, filename):
         df = parse_contents(contents, filename)
 
         if df is not None:
+            # df = df.apply(pd.to_numeric, errors='coerce')
+            #
+            # df = df.fillna(0)
             max_P = df[df.columns[1]].max()
             # if max_P > float(P_value):
             #     raise PreventUpdate
@@ -737,6 +779,9 @@ def bid_bigger_nominal(contents, P_value, clicks, filename):
         cur.close()
 
         if df is not None:
+            # df = df.apply(pd.to_numeric, errors='coerce')
+            #
+            # df = df.fillna(0)
             max_P = df[df.columns[1]].max()
 
             if max_P > float(total):
@@ -757,6 +802,9 @@ def table_format(contents, filename):
     else:
         df = parse_contents(contents, filename)
         if df is not None:
+            # df = df.apply(pd.to_numeric, errors='coerce')
+            #
+            # df = df.fillna(0)
             if (len(df.axes[1]) == 5) and (len(df.axes[0]) == 24):
                 return False
             else:
@@ -851,9 +899,12 @@ def score_fig(nome):
                Output('downl_data', 'disabled'),
                Output('downl_dap', 'disabled'),
                Output('downl_dap', 'children'),
+               Output('link_downl_imb', 'download'),
+               Output('link_downl_imb', 'href'),
                Output('loading_1', 'children'),
                Output('loading_2', 'children'),
-               Output('loading_3', 'children'), ],
+               Output('loading_3', 'children'),
+               Output('loading_5', 'children'),],
               [Input('Page_1', 'id')],
               # [State('wind_hist', 'data'),
               #  # State('irrad_hist', 'data')
@@ -875,6 +926,20 @@ def update_download_link(n_clicks):
 
     # b2 = int(flask.request.cookies.get('b2'))
     b2 = days
+
+    ubpr_pos = pd.DataFrame(app.UB_prices_pos)
+    ubpr_neg = pd.DataFrame(app.UB_prices_neg)
+
+    ubpr_pos = (ubpr_pos[ubpr_pos.columns[b2 + 1]])
+    ubpr_neg = (ubpr_neg[ubpr_neg.columns[b2 + 1]])
+
+    tn = pd.Series('t{}'.format(i) for i in range(1, 25))
+
+
+    df_imb = pd.DataFrame({'': tn, 'Lam Positive': ubpr_pos, 'Lam Negative':ubpr_neg})
+
+
+
 
 
 
@@ -937,6 +1002,35 @@ def update_download_link(n_clicks):
         ################################
 
 
+        ################################
+        ################################
+
+        DAP_historic = app.DAP_historic
+
+
+        DAP_historic['Date'] = pd.to_datetime(DAP_historic['Date'], format="%d/%m/%Y %H:%M")
+        # WT_speed_dates_hist = WT_speed['DateTime']
+
+        time_mask = DAP_historic['Date'] <= DAP_historic['Date'].iloc[-1] - datetime.timedelta(days=play_days*96/24 - b2)
+
+
+        dates_dap = DAP_historic['Date'][time_mask]
+
+        #
+        #
+        delta2 = (datetime.datetime.now() - datetime.datetime.strptime(str(dates_dap.iloc[-1]),
+                                                                       "%Y-%m-%d %H:%M:%S")).days
+
+        DAP_historic['Date'] = DAP_historic['Date'] + datetime.timedelta(delta2 + b2)
+
+        DAP_hist = DAP_historic[time_mask]
+        DAP_play = DAP_historic[~time_mask]
+        DAP_play = DAP_play[0 + 24 * b2:24 * (b2 + 24)]
+
+        ################################
+        ################################
+
+
 
         wf_power = pd.DataFrame(WT_speed_hist, columns=['DateTime', 'Measured'])
 
@@ -949,9 +1043,18 @@ def update_download_link(n_clicks):
         irrad_power['DateTime'] = irrad_power['DateTime'].dt.strftime('%Y-%m-%d %H:%M')
 
 
+        dap_day = pd.DataFrame(DAP_historic, columns=['Date', 'Day-ahead Price [EUR/MWh]'])
+
+        dap_day['Date'] = pd.to_datetime(dap_day['Date'])
+        dap_day['Date'] = dap_day['Date'].dt.strftime('%Y-%m-%d %H:%M')
+
+
+
         # nd1 = (app.dates_nextday.iloc[(b2 - 1) * 144:144 * (b2 - 1) + 144]).to_frame()
         nd1 = WT_speed_play
         nd1_i = PV_irradiation_play
+        nd1_dap = DAP_play
+
 
         # print((WT_speed_hist.iloc[-1, 0]))
         # print(type(datetime.timedelta(minutes=10)))
@@ -965,6 +1068,12 @@ def update_download_link(n_clicks):
         # print(nd1)
         nd1_i = nd1_i.drop('index', 1)
 
+        nd1_dap = nd1_dap.reset_index()
+        nd1_dap['Date'] = nd1_dap['Date'].dt.strftime('%Y-%m-%d %H:%M')
+        # print(nd1)
+        nd1_dap = nd1_dap.drop('index', 1)
+
+
 
         idx = pd.date_range(
             datetime.datetime.strptime(str(WT_speed_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(minutes=10),
@@ -973,6 +1082,11 @@ def update_download_link(n_clicks):
         idx_i = pd.date_range(
             datetime.datetime.strptime(str(PV_irradiation_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(minutes=15),
             periods=96, freq='15T')
+
+        idx_dap = pd.date_range(
+            datetime.datetime.strptime(str(DAP_historic.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(hours=1),
+            periods=24, freq='1H')
+
 
         ze = np.zeros((len(idx), 1))
         ndz = pd.DataFrame(ze, index=idx)
@@ -986,8 +1100,17 @@ def update_download_link(n_clicks):
         ndz_i = ndz_i.rename(columns={'index': 'DateTime', 0: 'Irradiation [kW/m2]'})
 
 
+        ze_dap = np.zeros((len(idx_dap), 1))
+        ndz_dap = pd.DataFrame(ze_dap, index=idx_dap)
+        ndz_dap = ndz_dap.reset_index()
+        ndz_dap = ndz_dap.rename(columns={'index': 'Date', 0: 'Day-ahead Price [EUR/MWh]'})
+
+
         dff2 = wf_power.append((ndz), ignore_index=True)
-        dff2 = dff2.rename(columns={'DateTime': 'date', 'Measured': 'speed'})
+        dff2 = dff2.rename(columns={'DateTime': 'Date', 0: 'speed'})
+
+        dff_dap = dap_day.append((ndz_dap), ignore_index=True)
+        # dff_dap = dff_dap.rename(columns={'DateTime': 'date', 'Cleared [EUR/MWh]': 'Cleared'})
 
         dff1 = wf_power.append(nd1, ignore_index=True)
 
@@ -1021,23 +1144,32 @@ def update_download_link(n_clicks):
         df_dap = pd.DataFrame({'': tn, 'DAP': aa.iloc[:, 1]})
         dap_file = 'DAP_{}.csv'.format((datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
-        csv_string_dap = df_dap.to_csv(index=False, header=True, encoding='utf-8')
-        csv_string_dap = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_dap)
+        # csv_string_dap = df_dap.to_csv(index=False, header=True, encoding='utf-8')
+        # csv_string_dap = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_dap)
 
         csv_string = dff2.to_csv(index=False, header=True, encoding='utf-8')
         csv_string = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string)
 
         csv_string_irrad = dff2_i.to_csv(index=False, header=True, encoding='utf-8')
         csv_string_irrad = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_irrad)
+
+        csv_string_imbF = df_imb.to_csv(index=False, header=True, encoding='utf-8')
+        csv_string_imbF = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_imbF)
+
+        csv_string_dap = dff_dap.to_csv(index=False, header=True, encoding='utf-8')
+        csv_string_dap = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_dap)
         # print(dff)
         nfile = 'windSpeed_{}.csv'.format(
+            (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
+
+        imbfile = 'imbFactors_{}.csv'.format(
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
         sifile = 'solarIrrad_{}.csv'.format(
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
-        return csv_string, ' Download Updated Historical Data', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False, False, \
-               ' Download Day Ahead Prices', button1, button2, button3
+        return csv_string, ' Download Updated Historical Data', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False,\
+                False, ' Download Day Ahead Prices', imbfile, csv_string_imbF, button1, button2, button3, button3
 
 
     else:
@@ -1133,6 +1265,26 @@ def update_download_link(n_clicks):
         ################################
 
 
+        ################################
+        ################################
+
+        DAP_historic = app.DAP_historic
+
+
+        DAP_historic['Date'] = pd.to_datetime(DAP_historic['Date'], format="%d/%m/%Y %H:%M")
+        # WT_speed_dates_hist = WT_speed['DateTime']
+
+        time_mask = DAP_historic['Date'] <= DAP_historic['Date'].iloc[-1] - datetime.timedelta(days=play_days)
+        #
+        dates_dap = DAP_historic['Date'][time_mask]
+
+        csv_string_imbF = df_imb.to_csv(index=False, header=True, encoding='utf-8')
+        csv_string_imbF = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_imbF)
+
+        ################################
+        ################################
+
+
         p_wf_power = WT_speed_hist
 
         aa = WT_speed_hist
@@ -1170,6 +1322,9 @@ def update_download_link(n_clicks):
         nfile = 'windSpeed_{}.csv'.format(
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
+        imbfile = 'imbFactors_{}.csv'.format(
+            (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
+
         sifile = 'solarIrrad_{}.csv'.format(
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
@@ -1183,8 +1338,8 @@ def update_download_link(n_clicks):
         csv_string_irrad = dff_irrad.to_csv(index=False, header=True, encoding='utf-8')
         csv_string_irrad = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_irrad)
 
-        return csv_string, ' Download Historical Data', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False, False, \
-               ' Download Day Ahead Prices', button1, button2, button3
+        return csv_string, ' Download Historical Data', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False, \
+               False, ' Download Day Ahead Prices', imbfile, csv_string_imbF, button1, button2, button3, button3
 
 
 ## Leaderboard popover

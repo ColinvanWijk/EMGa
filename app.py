@@ -35,7 +35,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
                 meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}])
 
 
-app.database_url = 'Server' # 'Local'
+app.database_url = 'Local'#'Server' # 'Local'
 play_days = 10 # Define the number of days to be played
 
 Number_WT = 1
@@ -152,6 +152,14 @@ url_irrad = 'https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/mast
 app.PV_irradiation = pd.read_csv(url_irrad, header=0, parse_dates=[0], squeeze=True, date_parser=parser2)
 
 app.PV_irradiation = pd.DataFrame(app.PV_irradiation)
+
+
+url_dap_hist = 'https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/DAP_historic_2.csv'
+app.DAP_historic = pd.read_csv(url_dap_hist, header=0, parse_dates=[0], squeeze=True, date_parser=parser2)
+
+app.DAP_historic = pd.DataFrame(app.DAP_historic)
+
+# print(app.DAP_historic)
 
 # A = app.PV_irradiation.resample('H', on='DateTime').mean()
 # a_i = pd.DataFrame(data=A, index=A.index)

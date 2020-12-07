@@ -108,6 +108,21 @@ def download_DAP():
     ])
     return D
 
+def imb_factors():
+    FF = html.Div([
+        html.Div([
+
+            html.A(dcc.Loading(id='loading_5', color=app.color_3, type='default'),
+                   id='link_downl_imb',
+                   download="",
+                   href="",
+                   target="_blank"
+                   ),
+        ]),  #
+
+    ])
+    return FF
+
 
 def return_page1():
     E = html.Div([

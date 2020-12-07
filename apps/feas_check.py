@@ -300,12 +300,12 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
             return (model.cost[i,d] == 0.0)
     model.cost_constr = Constraint(model.S, rule=cost_rule)
 
-    def flex_rule(model,i):
-        if i == 0:
-            return (0,model.flex[i,d],model.Flex_max[i])
-        else:
-            return (0,model.flex[i,d],0)
-    model.flex_constr = Constraint(model.S, rule=flex_rule)
+    # def flex_rule(model,i):
+    #     if i == 0:
+    #         return (0,model.flex[i,d],model.Flex_max[i])
+    #     else:
+    #         return (0,model.flex[i,d],0)
+    # model.flex_constr = Constraint(model.S, rule=flex_rule)
 
 
     def maxP_rule(model,i):
