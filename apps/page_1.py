@@ -125,6 +125,26 @@ button4 = html.Div([
 
 ])
 
+
+button5 = html.Div([
+    html.Div([
+        html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/imb_tu1.svg',
+                 alt="Avatar", className="image",
+                 title='Portfolio',
+                 # style={'height': '7vw','width': '7vw'}
+                 ),
+        html.Div([
+            html.Img(
+                src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/imb_tu2.svg',
+                alt="Avatar", className="image",
+                title='Portfolio',
+                # style={'height': '7vw','width': '7vw'}
+            ),
+        ], className="overlay"),
+    ], className="container", ),
+
+])
+
 # ##################### - FIRST PAGE - ############################
 layout = html.Div([
 
@@ -481,10 +501,10 @@ def display_confirm(contents, filename):
 
         if df is not None:
 
-            # df = df.apply(pd.to_numeric, errors='coerce')
-            #
-            # df = df.fillna(0)
 
+            df.loc[1:] = df.loc[1:].apply(pd.to_numeric, errors='coerce')
+
+            df = df.fillna(0)
 
 
             df_1 = df.to_json()
@@ -558,9 +578,9 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
 
         if df is not None:
 
-            # df = df.apply(pd.to_numeric, errors='coerce')
-            #
-            # df = df.fillna(0)
+            df.loc[1:] = df.loc[1:].apply(pd.to_numeric, errors='coerce')
+
+            df = df.fillna(0)
 
             if (len(df.axes[1]) == 5) and (len(df.axes[0]) == 24):
                 col = {
@@ -689,9 +709,9 @@ def update_texts(contents, P_value, clicks, ok_button, filename):
 
         if df is not None:
 
-            # df = df.apply(pd.to_numeric, errors='coerce')
-            #
-            # df = df.fillna(0)
+            df.loc[1:] = df.loc[1:].apply(pd.to_numeric, errors='coerce')
+
+            df = df.fillna(0)
 
             if (len(df.axes[1]) == 5) and (len(df.axes[0]) == 24):
                 prompt = 'Click SUBMIT to Continue'
@@ -738,9 +758,9 @@ def update_filename(contents, P_value, filename):
         df = parse_contents(contents, filename)
 
         if df is not None:
-            # df = df.apply(pd.to_numeric, errors='coerce')
-            #
-            # df = df.fillna(0)
+            df.loc[1:] = df.loc[1:].apply(pd.to_numeric, errors='coerce')
+
+            df = df.fillna(0)
             max_P = df[df.columns[1]].max()
             # if max_P > float(P_value):
             #     raise PreventUpdate
@@ -779,9 +799,9 @@ def bid_bigger_nominal(contents, P_value, clicks, filename):
         cur.close()
 
         if df is not None:
-            # df = df.apply(pd.to_numeric, errors='coerce')
-            #
-            # df = df.fillna(0)
+            df.loc[1:] = df.loc[1:].apply(pd.to_numeric, errors='coerce')
+
+            df = df.fillna(0)
             max_P = df[df.columns[1]].max()
 
             if max_P > float(total):
@@ -802,9 +822,9 @@ def table_format(contents, filename):
     else:
         df = parse_contents(contents, filename)
         if df is not None:
-            # df = df.apply(pd.to_numeric, errors='coerce')
-            #
-            # df = df.fillna(0)
+            df.loc[1:] = df.loc[1:].apply(pd.to_numeric, errors='coerce')
+
+            df = df.fillna(0)
             if (len(df.axes[1]) == 5) and (len(df.axes[0]) == 24):
                 return False
             else:
@@ -1025,7 +1045,8 @@ def update_download_link(n_clicks):
 
         DAP_hist = DAP_historic[time_mask]
         DAP_play = DAP_historic[~time_mask]
-        DAP_play = DAP_play[0 + 24 * b2:24 * (b2 + 24)]
+        DAP_play = DAP_play[0 + 24 * b2:24 * (b2 + 1)]
+
 
         ################################
         ################################
@@ -1043,7 +1064,7 @@ def update_download_link(n_clicks):
         irrad_power['DateTime'] = irrad_power['DateTime'].dt.strftime('%Y-%m-%d %H:%M')
 
 
-        dap_day = pd.DataFrame(DAP_historic, columns=['Date', 'Day-ahead Price [EUR/MWh]'])
+        dap_day = pd.DataFrame(DAP_hist, columns=['Date', 'Day-ahead Price [EUR/MWh]'])
 
         dap_day['Date'] = pd.to_datetime(dap_day['Date'])
         dap_day['Date'] = dap_day['Date'].dt.strftime('%Y-%m-%d %H:%M')
@@ -1084,7 +1105,7 @@ def update_download_link(n_clicks):
             periods=96, freq='15T')
 
         idx_dap = pd.date_range(
-            datetime.datetime.strptime(str(DAP_historic.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(hours=1),
+            datetime.datetime.strptime(str(DAP_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(hours=1),
             periods=24, freq='1H')
 
 
@@ -1169,7 +1190,7 @@ def update_download_link(n_clicks):
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
         return csv_string, ' Download Updated Historical Data', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False,\
-                False, ' Download Day Ahead Prices', imbfile, csv_string_imbF, button1, button2, button3, button3
+                False, ' Download Day Ahead Prices', imbfile, csv_string_imbF, button1, button2, button3, button5
 
 
     else:
@@ -1278,6 +1299,37 @@ def update_download_link(n_clicks):
         #
         dates_dap = DAP_historic['Date'][time_mask]
 
+        #
+        #
+        delta2 = (datetime.datetime.now() - datetime.datetime.strptime(str(dates_dap.iloc[-1]),
+                                                                       "%Y-%m-%d %H:%M:%S")).days
+
+        DAP_historic['Date'] = DAP_historic['Date'] + datetime.timedelta(delta2 + b2)
+
+        DAP_hist = DAP_historic[time_mask]
+        DAP_play = DAP_historic[~time_mask]
+        DAP_play = DAP_play[0 + 24 * b2:24 * (b2 + 1)]
+
+
+        dap_day = pd.DataFrame(DAP_hist, columns=['Date', 'Day-ahead Price [EUR/MWh]'])
+
+        dap_day['Date'] = pd.to_datetime(dap_day['Date'])
+        dap_day['Date'] = dap_day['Date'].dt.strftime('%Y-%m-%d %H:%M')
+
+        idx_dap = pd.date_range(
+            datetime.datetime.strptime(str(DAP_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(hours=1),
+            periods=24, freq='1H')
+
+        ze_dap = np.zeros((len(idx_dap), 1))
+        ndz_dap = pd.DataFrame(ze_dap, index=idx_dap)
+        ndz_dap = ndz_dap.reset_index()
+        ndz_dap = ndz_dap.rename(columns={'index': 'Date', 0: 'Day-ahead Price [EUR/MWh]'})
+        dff_dap = dap_day.append((ndz_dap), ignore_index=True)
+
+        csv_string_dap = dff_dap.to_csv(index=False, header=True, encoding='utf-8')
+        csv_string_dap = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_dap)
+
+
         csv_string_imbF = df_imb.to_csv(index=False, header=True, encoding='utf-8')
         csv_string_imbF = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_imbF)
 
@@ -1329,8 +1381,8 @@ def update_download_link(n_clicks):
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
         ################################
-        csv_string_dap = df_dap.to_csv(index=False, header=True, encoding='utf-8')
-        csv_string_dap = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_dap)
+        # csv_string_dap = df_dap.to_csv(index=False, header=True, encoding='utf-8')
+        # csv_string_dap = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_dap)
 
         csv_string = dff1.to_csv(index=False, header=True, encoding='utf-8')
         csv_string = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string)
@@ -1339,7 +1391,7 @@ def update_download_link(n_clicks):
         csv_string_irrad = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_irrad)
 
         return csv_string, ' Download Historical Data', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False, \
-               False, ' Download Day Ahead Prices', imbfile, csv_string_imbF, button1, button2, button3, button3
+               False, ' Download Day Ahead Prices', imbfile, csv_string_imbF, button1, button2, button3, button5
 
 
 ## Leaderboard popover
