@@ -146,7 +146,7 @@ layout = html.Div([
                                                         html.Div(
                                                             dcc.Checklist(
                                                                 options=[
-                                                                    {"label": "Thermic Plant", "value": '1'},
+                                                                    {"label": "Thermal Plant", "value": '1'},
                                                                 ],
                                                                 labelStyle={'color': 'black', 'font-size': '1.2vw', },
                                                                 inputStyle={"width": "2vw"},

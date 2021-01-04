@@ -35,7 +35,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
                 meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}])
 
 
-app.database_url = 'Server'#' #
+app.database_url = 'Server' #'Local'#' # 'Server'
 play_days = 10 # Define the number of days to be played
 
 Number_WT = 1
@@ -57,6 +57,7 @@ app.color_1 = '#eeeeee'#'#9D9C9D'  # Background page
 app.color_2 = '#FAFAFA'  # Background figures
 # app.color_3 = '#222831'  # Color header and sidebar
 app.color_3 = '#142850' # Color header and sidebar
+#app.color_3 = '#3D195B' # Premier league purple
 app.color_4 = '#eeeeee'   # Main text color
 app.color_5 = '#D8F7FF'  # Rate, positive
 app.color_6 = '#27496d'    # Second color header

@@ -291,6 +291,27 @@ def display_graph(nome):
         therm_bid = (df.iloc[:, 1])
         storage_bid = (df.iloc[:, 4])
 
+        Adf = (pd.DataFrame(df.sum(axis=1)))
+
+        Adf.reset_index(drop=True)
+
+
+        Bdf = (Adf.sub(pd.DataFrame(phi_plus), fill_value=0))
+
+
+
+        print(Adf) # CONTINUAR AQUI!
+
+        print(Bdf)
+
+
+
+
+
+
+
+        # print('aqui: ' + '{}'.format(pd.DataFrame(phi_plus)))# - (phi_plus.iloc[:, 0] + zeta_plus.iloc[:,0] + rho_plus.iloc[:,0]))))
+
 
 
 
@@ -377,24 +398,9 @@ def display_graph(nome):
 
 
 
-            # print(a.flex[0,t].value)
-            #
-            # print(a.cost[0,t].value)
-            # if (a.Imbalance[t]) >= 0:
-            #     print('pos')
-            #     print(sum(a.cost[i,t].value for i in a.S) + a.price_plus[t].value*(a.Imbalance[t] - a.flex[0,t].value) )
-            #     print(a.price_plus[t].value * (a.Imbalance[t]))
-            # if (a.Imbalance[t]) < 0:
-            #     print('neg')
-            #     print(sum(a.cost[i,t].value for i in a.S) + a.price_neg[t].value*(-a.Imbalance[t] - a.flex[0,t].value) )
-            #     print(a.price_neg[t].value * (-a.Imbalance[t]))
-
-
-
-
-
         #########################
 
+        cost = pd.DataFrame(cost)
 
 
         for i in range(len(realp)):
@@ -410,14 +416,15 @@ def display_graph(nome):
 
             if unb[i] >= 0.0:
                 act_prices[i] = (unb[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])
-                act_prices_feas[i] = (unb.array[i] - (tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])  #- cost.iloc[i]
+                act_prices_feas[i] = (unb.array[i] - (tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1]) - (cost.iloc[i])
 
             else:
                 act_prices[i] = unb[i] * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1])
-                act_prices_feas[i] = (unb.array[i] - (tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) #- cost.iloc[i]
+                act_prices_feas[i] = (unb.array[i] - (tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) - (cost.iloc[i])
 
             act_prices = pd.DataFrame(act_prices)
             act_prices_feas = pd.DataFrame(act_prices_feas)
+
 
 
 
@@ -467,9 +474,6 @@ def display_graph(nome):
         #########################################################################
         pr = pd.DataFrame(app.prices)
 
-        fact = pd.DataFrame(app.real_P)
-        ubpr_pos = pd.DataFrame(app.UB_prices_pos)
-        ubpr_neg = pd.DataFrame(app.UB_prices_neg)
         # realp = (fact[fact.columns[b2 + 1]]).array + realp_pv.array
         # unb = realp - total_bid
         # act_prices = np.zeros((len(realp), 1))

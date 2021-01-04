@@ -1449,6 +1449,7 @@ def toggle_popover(n, is_open):
     # data = flask.jsonify(df)
     # data = df.to_json()
     # columns = df.head()
+    df = df.round({'revenue': 2, 'rate': 2})
     data = [
         {p: df.at[i, p] for p in df.columns}
         # dict(Model=i, **{param: app.lead_board[i]['index'] for param in params})
