@@ -48,6 +48,8 @@ user_pwd, user_names = users_info()
 
 play_days = app.play_days
 
+print(play_days)
+
 button1 = html.Div([
     html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/wind_tu1.svg',
@@ -1031,7 +1033,7 @@ def update_download_link(n_clicks):
         DAP_historic['Date'] = pd.to_datetime(DAP_historic['Date'], format="%d/%m/%Y %H:%M")
         # WT_speed_dates_hist = WT_speed['DateTime']
 
-        time_mask = DAP_historic['Date'] <= DAP_historic['Date'].iloc[-1] - datetime.timedelta(days=play_days*96/24 - b2)
+        time_mask = DAP_historic['Date'] <= DAP_historic['Date'].iloc[-1] - datetime.timedelta(days=play_days - b2)
 
 
         dates_dap = DAP_historic['Date'][time_mask]
