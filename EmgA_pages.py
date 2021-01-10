@@ -174,7 +174,7 @@ def display_page(pathname):
 
             cur = conn.cursor()
 
-            cur.execute("SELECT thermic FROM portfolio WHERE player = (%s);", (session_cookie,))
+            cur.execute("SELECT thermal FROM portfolio WHERE player = (%s);", (session_cookie,))
             # print(players)
             id = cur.fetchone()
             cur.close()

@@ -37,7 +37,7 @@ DATABASE_URL = (url_data)
 
 # user_pwd, user_names = users_info()
 
-port_param = pd.read_csv('https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/Portafolio_parameters.csv',
+port_param = pd.read_csv('https://raw.githubusercontent.com/juan-giraldo-ch/emga_portfolio/main/apps/Portafolio_parameters.csv?token=ANR35YR3C2LHI5A752B6SVTAARTMU',
     #r'C:\Users\20194851\Google Drive\Postdoc TUe\Project Serious Game\Dash_tests\EMGA_portfolio\apps\Portafolio_parameters.csv',
     header=0, squeeze=True)
 
@@ -1206,7 +1206,7 @@ def spider_fig(ess, pv, wt, th, ess_dis, pv_dis, wt_dis, th_dis, nclick):
         ############################################################
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
         cur = conn.cursor()
-        cur.execute("""INSERT INTO portfolio (player, thermic, wind, solar, storage, flexibility) VALUES (%s, %s, %s, %s, %s, %s)""",
+        cur.execute("""INSERT INTO portfolio (player, thermal, wind, solar, storage, flexibility) VALUES (%s, %s, %s, %s, %s, %s)""",
         (user_active, th * (not th_dis), wt * (not wt_dis), pv * (not pv_dis), ess * (not ess_dis), disp))
         # cur.execute("""UPDATE portfolio SET thermic = (%s) WHERE Player = (%s);""", (th * (not th_dis), user_active,))
         # cur.execute("""UPDATE Leader_board SET Revenue = (%s) WHERE Player = (%s);""", (accumA, user_active,))
