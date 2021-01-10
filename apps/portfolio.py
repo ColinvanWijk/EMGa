@@ -355,7 +355,7 @@ layout = html.Div([
                                       'display': 'inline-block', 'height': '100%'}
                         ),
 
-                    ], width=3, lg=3, md=3, sm=3, style={'height': '100%', }
+                    ], width=4, lg=4, md=4, sm=4, style={'height': '100%', }
                 ),
 
                 dbc.Col(
@@ -565,7 +565,7 @@ layout = html.Div([
                             ]
                         ),
 
-                    ], width=3, lg=3, md=3, sm=3, style={'height': '100%', }
+                    ], width=4, lg=4, md=4, sm=4, style={'height': '100%', }
                 ),
 
                 dbc.Col([
@@ -613,9 +613,9 @@ layout = html.Div([
                                                         ),
                                                         html.Div(id='slider_pv_container')
                                                     ], style={'font-size': '1.0vw', 'width': '100%',
-                                                              'display': 'inline-block'}),
+                                                              'display': 'none'}),
                                                     html.Div(id='slider_pv_container',
-                                                             style={'font-size': '1.0vw', 'display': 'inline-block', }),
+                                                             style={'font-size': '1.0vw', 'display': 'none', }),
 
                                                 ], style={'width': '100%'}
                                             ),
@@ -642,7 +642,7 @@ layout = html.Div([
                                                                   'textAlign': 'center', 'width': '2 vw'}
                                                     ),
 
-                                                ], style={'height': '2.0vw'}
+                                                ], style={'height': '2.0vw', 'display': 'none'}
                                             ),
 
                                             html.Div(
@@ -773,10 +773,10 @@ layout = html.Div([
                                     ),
                                 ], style={'height': '100%', "width": "22vw", 'textAlign': 'center', },
                             ),
-                        ], style={"width": "100%", }
+                        ], style={"width": "100%", 'display': 'none'}
                     ),
 
-                ], width=3, lg=3, md=3, sm=3, style={'height': '100%', }
+                ], width='none', lg='none', md='none', sm='none', style={'height': '100%', }
                 ),
 
                 dbc.Col([
@@ -989,7 +989,7 @@ layout = html.Div([
                         ], style={"width": "100%", }
                     ),
 
-                ], width=3, lg=3, md=3, sm=3, style={'height': '100%', }
+                ], width=4, lg=4, md=4, sm=4, style={'height': '100%', }
                 ),
 
             ], justify="around", align="center", style={'height': '32vw'},

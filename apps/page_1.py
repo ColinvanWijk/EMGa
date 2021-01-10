@@ -48,7 +48,6 @@ user_pwd, user_names = users_info()
 
 play_days = app.play_days
 
-print(play_days)
 
 button1 = html.Div([
     html.Div([
