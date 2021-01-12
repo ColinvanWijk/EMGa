@@ -312,7 +312,7 @@ def render_content(data):
                         html.Div([
 
                             buttons.help_drag(),
-                        ], style={'display': 'inline-block', 'textAlign': 'left', 'margin': 'auto'}),
+                        ], style={'display': 'inline-block', 'textAlign': 'center', 'margin': 'auto'}),
 
                     ], width=2, lg=2, md=2, sm=2, align='center'
                 ),
@@ -330,10 +330,10 @@ def render_content(data):
                                                             style={'font-size': '1.4vw', 'color': app.color_4}),
                                                     style={'display': 'inline-block'}),
                                            ],
-                                 style={'height': '3vw'}
+                                 style={'height': '3vw', 'textAlign': 'center'}
                                  ),
 
-                    ], width=4, lg=4, md=4, sm=4, ),
+                    ], width=4, lg=4, md=4, sm=4, align='center'),
                 dbc.Col(
                     [
                         html.Div(dcc.LogoutButton(logout_url='/logout',
@@ -344,7 +344,7 @@ def render_content(data):
                                  id='logout_but', ),
                     ]
                     , width=3, lg=3, md=3, sm=3)
-            ], style={'backgroundColor': app.color_6, }, justify="center", ),
+            ], style={'backgroundColor': app.color_6, }, justify="around", align="center", ),
 
             dbc.Row([
                 dbc.Col(

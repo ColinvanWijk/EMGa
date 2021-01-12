@@ -15,8 +15,11 @@ def submit_b():
         html.Div([
             # dcc.Link(html.Button('3. Submit', id='button', disabled=True, style={'color':app.color_4})),
             dcc.Link(
-                dbc.Button(size='md', color="success", outline=True, children='Submit', id='button', disabled=True,
-                           style={'font-size': '1.2vw'}), href='/Page_2'),
+                html.Button('TRADE', id='button', type='submit',
+                            style={'font-size': '1.2vw'}, className='disabled'),
+                # dbc.Button(size='md', color="success", outline=True, children='TRADE', id='button', disabled=True,
+                #            style={'font-size': '1.2vw'}),
+                href='/Page_2'),
             html.Div(id='Button_data',
                      children='',
                      # style={'color': app.color_8, 'font-size': '22px', 'textAlign': 'center'}
@@ -171,7 +174,7 @@ def help_drag():
                 ], id='your_button', style={'height': '3vw', 'border': 'none', 'background': 'none'}
                 ),
 
-            ], style={'display': 'inline-block', 'textAlign': 'left'}
+            ], style={'display': 'inline-block', 'textAlign': 'center'}
             ),
 
         dbc.Modal(

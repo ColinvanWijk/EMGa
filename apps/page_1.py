@@ -54,14 +54,14 @@ button1 = html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/wind_tu1.svg',
                  alt="Avatar", className="image",
                  title='Download Historical Wind Data',
-                 # style={'height': '70%','width': '70%'}
+                 style={'height': '10vw','width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/wind_tu_2.svg',
                 alt="Avatar", className="image",
                 title='Download Historical Wind Data',
-                # style={'height': '70%', 'width': '70%'}
+                style={'height': '10vw', 'width': '10vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
@@ -73,14 +73,14 @@ button2 = html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/stocks1.svg',
                  alt="Avatar", className="image",
                  title='Download Day Ahead Data',
-                 # style={'height': '10vw','width': '10vw'}
+                 style={'height': '10vw','width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/stocks_2.svg',
                 alt="Avatar", className="image",
                 title='Download Day Ahead Data',
-                # style={'height': '10vw','width': '10vw'}
+                style={'height': '10vw','width': '10vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
@@ -92,14 +92,14 @@ button3 = html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/solar_tu.svg',
                  alt="Avatar", className="image",
                  title='Download Historical Irradiation',
-                 # style={'height': '10vw','width': '10vw'}
+                 style={'height': '10vw','width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/solar_tu2.svg',
                 alt="Avatar", className="image",
                 title='Download Historical Irradiation',
-                # style={'height': '10vw','width': '10vw'}
+                style={'height': '10vw','width': '10vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
@@ -112,14 +112,14 @@ button4 = html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/portfolio_1.svg',
                  alt="Avatar", className="image",
                  title='Portfolio',
-                 style={'height': '7vw','width': '7vw'}
+                 style={'height': '6vw','width': '6vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/portfolio.svg',
                 alt="Avatar", className="image",
                 title='Portfolio',
-                style={'height': '7vw','width': '7vw'}
+                style={'height': '6vw','width': '6vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
@@ -132,14 +132,14 @@ button5 = html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/imb_tu1.svg',
                  alt="Avatar", className="image",
                  title='Portfolio',
-                 # style={'height': '7vw','width': '7vw'}
+                 style={'height': '10vw','width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/imb_tu2.svg',
                 alt="Avatar", className="image",
                 title='Portfolio',
-                # style={'height': '7vw','width': '7vw'}
+                style={'height': '10vw','width': '10vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
@@ -166,20 +166,46 @@ layout = html.Div([
 
                     dbc.Col([
                     ], width=10, lg=10, md=10, sm=10),
-                ], style={'height': '1vw'},
+                ], style={'height': '1vw', 'backgroundColor': app.color_3},
             ),
 
             dbc.Row(
                 [
+
+
                     dbc.Col([
+                        html.B('My Performance',
+                               style={'font-size': '1.7vw','color':app.color_4, 'width': '100%', 'height':'1.5vw'}),
+
                         score_info.position_lead(),
 
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
 
                     dbc.Col([
-                        tue_header.curr_date(),
-                    ], width=10, lg=10, md=10, sm=10),
-                ], style={'height': '5vw'},
+                        # tue_header.curr_date(),
+                    ], width=4, lg=4, md=4, sm=4),
+
+                    dbc.Col([
+
+                        html.Div([
+                            buttons.download_irrad(),
+                        ], style={'textAlign': 'center'}),
+                    ], width=3, lg=3, md=3, sm=3, align="start"),
+
+                    dbc.Col([
+
+                        html.Div([
+                            buttons.download_data(),
+                        ], style={'textAlign': 'center'}),
+                    ], width=3, lg=3, md=3, sm=3, align="start"),
+
+
+
+                    # dbc.Col([
+                    #     # tue_header.curr_date(),
+                    # ], width=2, lg=2, md=2, sm=2),
+
+                ], style={'height': '8vw'}
             ),
 
             # Second row
@@ -192,19 +218,8 @@ layout = html.Div([
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3}),
 
                     dbc.Col([
-
-                        html.Div([
-                            buttons.download_irrad(),
-                        ], style={'textAlign': 'center'}),
-                    ], width=3, lg=3, md=3, sm=3),
-
-                    dbc.Col([
-
-                        html.Div([
-                            buttons.download_data(),
-                        ], style={'textAlign': 'center'}),
-                    ], width=3, lg=3, md=3, sm=3),
-
+                        tue_header.curr_date(),
+                    ], width=4, lg=4, md=4, sm=4, align="center"),
 
                     dbc.Col([
                         html.Div([
@@ -212,19 +227,32 @@ layout = html.Div([
                         ], style={'textAlign': 'center'}),
                     ], width=3, lg=3, md=3, sm=3),
 
-                    # dbc.Col([
-                    #     html.Div([
-                    #         buttons.download_irrad(),
-                    #     ], style={'textAlign': 'center'}),
-                    # ], width=3, lg=3, md=3, sm=3),
+                    dbc.Col([
 
-                ], style={'height': '10vw'}, justify="between"
+                        html.Div([
+                            buttons.imb_factors(),
+                        ], style={'textAlign': 'center'}),
+                    ], width=3, lg=3, md=3, sm=3),
+
+                    # dbc.Col([ # PORTFOLIO
+                    #     html.Div([
+                    #         # dcc.Loading([
+                    #         html.Div([
+                    #             buttons.port_info(),
+                    #         ], ),
+                    #         # ],id='loading_port', color=app.color_3, type='default'),
+                    #
+                    #     ], )
+                    # ], width=3, lg=3, md=3, sm=3, style={'textAlign': 'center'}),
+
+                ], style={'height': '4.5vw'}, justify="between"
             ),
 
             dbc.Row(
                 [
                     dbc.Col([
                         # score_info.self_score(),
+                        leader_board.L_table(),
 
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3}),
 
@@ -233,7 +261,7 @@ layout = html.Div([
                     dbc.Col([
 
                         html.Div([
-                            buttons.imb_factors(),
+                            # buttons.imb_factors(),
                         ], style={'textAlign': 'center'}),
                     ], width=5, lg=5, md=5, sm=5),
 
@@ -241,7 +269,6 @@ layout = html.Div([
                         html.Div([
                             # dcc.Loading([
                             html.Div([
-                                buttons.port_info(),
                             ], ),
                             # ],id='loading_port', color=app.color_3, type='default'),
 
@@ -250,14 +277,47 @@ layout = html.Div([
 
 
 
-                ], style={'height': '10vw'}, justify="between"
+                ], style={'height': '5vw'}, justify="between"
             ),
+
+            dbc.Row([
+                dbc.Col([
+                    # score_info.self_score(),
+
+                ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3}
+                ),
+
+                dbc.Col([
+                    # dbc.Alert([
+                    html.Div([
+                        buttons.submit_b(),
+                    ], style={'textAlign': 'center', 'height': '100%'}),
+                    # ], color="info"),
+
+                ], width=4, lg=4, md=4, sm=4, style={'textAlign': 'center'}),
+
+
+
+                dbc.Col([
+
+                    dbc.Alert("This is a success alert! Well done!", color="success"),
+
+                ], width=6, lg=6, md=6, sm=6, style={'textAlign': 'center'}
+                ),
+
+                dbc.Col([
+                    # score_info.self_score(),
+
+                ], width=2, lg=2, md=2, sm=2
+                ),
+
+            ]),
 
             dbc.Row(
                 [
                     dbc.Col([
                         html.Div([
-                            leader_board.L_table()
+                            # leader_board.L_table()
                         ], style={'marginTop': '7vw'}, )
 
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
@@ -305,7 +365,7 @@ layout = html.Div([
                 dbc.Col([
                     # dbc.Alert([
                     html.Div([
-                        buttons.submit_b(),
+                        # buttons.submit_b(),
                     ], style={'textAlign': 'center', 'height': '100%'}),
                     # ], color="info"),
 
@@ -748,7 +808,7 @@ def update_texts(contents, P_value, clicks, ok_button, filename):
 #################################################
 
 # ----------  UPDATES THE AVAILABILITY OF BUTTON "SUBMIT" ----------- #
-@app.callback(Output('button', 'disabled'),
+@app.callback(Output('button', 'className'),
               [Input('Drag_file', 'contents'),
                Input('Pnom', 'value')],
               [State('Drag_file', 'filename')])
@@ -769,7 +829,7 @@ def update_filename(contents, P_value, filename):
             raise PreventUpdate
 
     else:
-        return False
+        return 'button-primary'
 
 
 #################################################
@@ -1402,6 +1462,7 @@ def update_download_link(n_clicks):
      Output('table-editing-simple', 'data'),
      Output('table-editing-simple', 'columns'),
      Output('position_lead1', 'value'),
+     Output('position_lead1', 'style'),
      Output('table-editing-simple', 'style_data_conditional')],
     [Input("popover-target", "n_clicks")],
     [State("popover", "is_open")],
@@ -1459,9 +1520,13 @@ def toggle_popover(n, is_open):
         for i in range(len(df['player']))
     ]
     # data = df.to_dict()
+
+    sdf= {'resize': 'none', #'width': '50%', 'height': '1%',
+                            'borderColor': app.color_3,'textAlign': 'center','backgroundColor':app.color_3, 'color':app.color_8, 'font-size': '1.2vw','width': '100%',
+                            'height':'3vw'}
     if n:
-        return not is_open, data, columns, f'{int(int(a[0]))}', style_data_conditional
-    return is_open, data, columns, f'{int(int(a[0]))}', style_data_conditional
+        return not is_open, data, columns, '#'+f'{int(int(a[0]))}', sdf, style_data_conditional
+    return is_open, data, columns, '#'+f'{int(int(a[0]))}', sdf, style_data_conditional
 
 
 # ----------  UPDATE SCOREBOARD ----------- #

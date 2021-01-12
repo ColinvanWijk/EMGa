@@ -38,9 +38,9 @@ def position_lead():
     C = html.Div([
         html.Div(id='position_lead', children='Current Position:',
                  style={'font-size': '1.2vw','color':app.color_4, 'width': '100%', 'height':'1.5vw'}),
-        dcc.Textarea(id='position_lead1', readOnly='readOnly', value='--',
+        dcc.Textarea(id='position_lead1', readOnly='readOnly', value='Click on Leaderboard',
                      style={'resize': 'none', #'width': '50%', 'height': '1%',
-                            'borderColor': app.color_3,'textAlign': 'center','backgroundColor':app.color_3, 'color':app.color_8, 'font-size': '1.2vw','width': '100%',
+                            'borderColor': app.color_3,'textAlign': 'center','backgroundColor':app.color_3, 'color':app.color_8, 'font-size': '0.7vw','width': '100%',
                             'height':'3vw'},
                      rows=0),
     ], id='position_lead_h')

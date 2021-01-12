@@ -63,7 +63,7 @@ def route_login():
         cur.execute("SELECT days FROM Leader_board WHERE Player = (%s);", (user_active,))
         # print(players)
         days = cur.fetchone()
-        cur.execute("SELECT thermic FROM portfolio WHERE player = (%s);", (session_cookie,))
+        cur.execute("SELECT thermal FROM portfolio WHERE player = (%s);", (session_cookie,))
         # print(players)
         id = cur.fetchone()
         cur.close()

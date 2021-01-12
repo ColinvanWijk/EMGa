@@ -62,8 +62,8 @@ def header():
 
 def curr_date():
     B = dcc.Markdown(id='Counter_day', style={
-        'float': 'right',
-        'font-size': '1.3vw',
-        'color':app.color_3},
+        'float': 'center',
+        'font-size': '1.7vw',
+        'color':app.color_3, 'textAlign': 'center'},
              )
     return B
