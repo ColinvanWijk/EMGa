@@ -182,8 +182,8 @@ layout = html.Div([
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
 
                     dbc.Col([
-                        # tue_header.curr_date(),
-                    ], width=4, lg=4, md=4, sm=4),
+                        tue_header.curr_date(),
+                    ], width=4, lg=4, md=4, sm=4, align="center"),
 
                     dbc.Col([
 
@@ -218,8 +218,8 @@ layout = html.Div([
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3}),
 
                     dbc.Col([
-                        tue_header.curr_date(),
-                    ], width=4, lg=4, md=4, sm=4, align="center"),
+                        buttons.submit_b(),
+                    ], width=4, lg=4, md=4, sm=4, align="end", style={'textAlign': 'center'}),
 
                     dbc.Col([
                         html.Div([
@@ -277,7 +277,7 @@ layout = html.Div([
 
 
 
-                ], style={'height': '5vw'}, justify="between"
+                ], style={'height': '4vw'}, justify="between"
             ),
 
             dbc.Row([
@@ -290,25 +290,25 @@ layout = html.Div([
                 dbc.Col([
                     # dbc.Alert([
                     html.Div([
-                        buttons.submit_b(),
+                        # buttons.submit_b(),
                     ], style={'textAlign': 'center', 'height': '100%'}),
                     # ], color="info"),
 
-                ], width=4, lg=4, md=4, sm=4, style={'textAlign': 'center'}),
+                ], width=1, lg=1, md=1, sm=1, style={'textAlign': 'center'}),
 
 
 
                 dbc.Col([
 
-                    dbc.Alert("This is a success alert! Well done!", color="success"),
+                    dbc.Alert("",id='alert_indic', is_open=False,),
 
-                ], width=6, lg=6, md=6, sm=6, style={'textAlign': 'center'}
+                ], width=8, lg=8, md=8, sm=8, style={'textAlign': 'center'}
                 ),
 
                 dbc.Col([
                     # score_info.self_score(),
 
-                ], width=2, lg=2, md=2, sm=2
+                ], width=1, lg=1, md=1, sm=1
                 ),
 
             ]),
@@ -1614,6 +1614,25 @@ def toggle_modal(n1, n2, is_open):
     if n1 or n2:
         return not is_open
     return is_open
+
+# WARNING TEXT
+@app.callback(
+    [Output("alert_indic", "is_open"),
+     Output("alert_indic", "children"),
+     Output('alert_indic','color')],
+    [Input('Drag_file', 'contents')],
+    [State("alert_indic", "is_open")],
+
+)
+def toggle_modal(df, is_open):
+    if df is None:
+        return is_open, 'Not READY', 'warning'
+    else:
+        return not is_open, 'You are ready to click TRADE!', 'success'
+
+
+
+
 
 
 @app.callback(
