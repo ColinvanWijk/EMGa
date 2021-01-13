@@ -16,7 +16,7 @@ def submit_b():
             # dcc.Link(html.Button('3. Submit', id='button', disabled=True, style={'color':app.color_4})),
             dcc.Link(
                 html.Button('TRADE', id='button', type='submit',
-                            style={'font-size': '1.2vw'}, className='disabled'),
+                            style={'font-size': '1.2vw'}, className='disabled',disabled=True),
                 # dbc.Button(size='md', color="success", outline=True, children='TRADE', id='button', disabled=True,
                 #            style={'font-size': '1.2vw'}),
                 href='/Page_2'),

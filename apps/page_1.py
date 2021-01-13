@@ -300,7 +300,7 @@ layout = html.Div([
 
                 dbc.Col([
 
-                    dbc.Alert("",id='alert_indic', is_open=False,),
+                    dbc.Alert("",id='alert_indic', is_open=False),
 
                 ], width=8, lg=8, md=8, sm=8, style={'textAlign': 'center'}
                 ),
@@ -318,7 +318,7 @@ layout = html.Div([
                     dbc.Col([
                         html.Div([
                             # leader_board.L_table()
-                        ], style={'marginTop': '7vw'}, )
+                        ], style={'marginTop': '1vw'}, )
 
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
 
@@ -357,7 +357,7 @@ layout = html.Div([
                     #     ], style={'marginTop': '7vw'})
                     # ], width=3, lg=3, md=3, sm=3, style={'textAlign': 'center'}),
 
-                ], style={'height': '20vw'},
+                ], style={'height': '10vw'},
             ),
 
             dbc.Row([
@@ -582,7 +582,11 @@ def display_confirm(contents, filename):
 # ---------- CHANGING STYLE OF DRAG/DROP SELECT BID FILE ----------- #
 @app.callback([Output('Drag_file', 'children'),
                Output('Drag_file', 'disabled'),
-               Output('Drag_file', 'style')],
+               Output('Drag_file', 'style'),
+               Output('button', 'disabled'),
+               Output('button', 'className'),
+
+               ],
               [Input('Drag_file', 'contents'),
                Input('Pnom', 'value'),
                Input('button', 'n_clicks'),
@@ -602,7 +606,7 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
             'backgroundColor': app.color_1, 'font-size': '1.2vw',
         }
         disab = False
-        return existing_state, disab, col
+        return existing_state, disab, col, True, 'disabled'
     if (P_value == 0 and contents is not None and clicks is None):
         df = parse_contents(contents, filename)
         if (len(df.axes[1]) == 5) and (len(df.axes[0]) == 24):
@@ -633,7 +637,7 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
                 }
             name = existing_state
         disab = False
-        return name, disab, col
+        return name, disab, col, False, 'button-primary'
     if P_value > 0 and contents is not None and clicks is None:
         df = parse_contents(contents, filename)
 
@@ -661,7 +665,7 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
                         # 'backgroundColor':'green',
                     }
                 name = filename
-                disab = True
+                disab = False
 
             else:
                 col = {
@@ -686,7 +690,7 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
             name = existing_state
             disab = False
 
-        return name, disab, col
+        return name, disab, col, False, 'button-primary'
 
     if (P_value > 0 and contents is not None and clicks is not None):
         df = parse_contents(contents, filename)
@@ -711,8 +715,8 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
 
             }
             name = existing_state
-            disab = True
-        return name, disab, col
+            disab = False
+        return name, disab, col, False, 'button-primary'
 
 
 #################################################
@@ -775,7 +779,7 @@ def update_texts(contents, P_value, clicks, ok_button, filename):
             df = df.fillna(0)
 
             if (len(df.axes[1]) == 5) and (len(df.axes[0]) == 24):
-                prompt = 'Click SUBMIT to Continue'
+                prompt = ''
                 col = {'color': app.color_line, 'font-size': '1.2vw', 'textAlign': 'center'}
                 bord = {'borderColor': app.color_3, 'borderWidth': '2.0px',
                         'backgroundColor': app.color_6}
@@ -807,29 +811,29 @@ def update_texts(contents, P_value, clicks, ok_button, filename):
 
 #################################################
 
-# ----------  UPDATES THE AVAILABILITY OF BUTTON "SUBMIT" ----------- #
-@app.callback(Output('button', 'className'),
-              [Input('Drag_file', 'contents'),
-               Input('Pnom', 'value')],
-              [State('Drag_file', 'filename')])
-def update_filename(contents, P_value, filename):
-    if contents is None or P_value == 0:
-        raise PreventUpdate
-    if P_value > 0 and contents is not None:
-        df = parse_contents(contents, filename)
-
-        if df is not None:
-            df.loc[1:] = df.loc[1:].apply(pd.to_numeric, errors='coerce')
-
-            df = df.fillna(0)
-            max_P = df[df.columns[1]].max()
-            # if max_P > float(P_value):
-            #     raise PreventUpdate
-        else:
-            raise PreventUpdate
-
-    else:
-        return 'button-primary'
+# # ----------  UPDATES THE AVAILABILITY OF BUTTON "SUBMIT" ----------- #
+# @app.callback(Output('button', 'className'),
+#               [Input('Drag_file', 'contents'),
+#                Input('Pnom', 'value')],
+#               [State('Drag_file', 'filename')])
+# def update_filename(contents, P_value, filename):
+#     if contents is None or P_value == 0:
+#         raise PreventUpdate
+#     if P_value > 0 and contents is not None:
+#         df = parse_contents(contents, filename)
+#
+#         if df is not None:
+#             df.loc[1:] = df.loc[1:].apply(pd.to_numeric, errors='coerce')
+#
+#             df = df.fillna(0)
+#             max_P = df[df.columns[1]].max()
+#             # if max_P > float(P_value):
+#             #     raise PreventUpdate
+#         else:
+#             raise PreventUpdate
+#
+#     else:
+#         return 'button-primary'
 
 
 #################################################
@@ -986,7 +990,7 @@ def score_fig(nome):
                Output('loading_2', 'children'),
                Output('loading_3', 'children'),
                Output('loading_5', 'children'),],
-              [Input('Page_1', 'id')],
+              [Input('Page_1', 'id'),],
               # [State('wind_hist', 'data'),
               #  # State('irrad_hist', 'data')
               #  ]
@@ -1619,16 +1623,25 @@ def toggle_modal(n1, n2, is_open):
 @app.callback(
     [Output("alert_indic", "is_open"),
      Output("alert_indic", "children"),
-     Output('alert_indic','color')],
-    [Input('Drag_file', 'contents')],
-    [State("alert_indic", "is_open")],
+     Output('alert_indic','color'),
+     Output("alert_indic", "disabled"),
+     ],
+    [Input('Drag_file', 'contents'),
+     Input('link_downl_dap', 'n_clicks'), #
+     Input('link_downl_imb', 'n_clicks'),
+     Input('link_downl', 'n_clicks'),
+     Input('Page_1', 'id')],
 
 )
-def toggle_modal(df, is_open):
-    if df is None:
-        return is_open, 'Not READY', 'warning'
+def toggle_modal(df, dap_click, imb_click, wt_click, pg):
+    if df is None and (dap_click and imb_click and wt_click):
+        return True, 'WARNING - Upload Bid File', 'danger', False
+
+    if not (dap_click and imb_click and wt_click):
+        return True, 'WARNING - Files pending to be downloaded', 'warning', False
+
     else:
-        return not is_open, 'You are ready to click TRADE!', 'success'
+        return True, 'You are ready to click TRADE!', 'success', True
 
 
 
