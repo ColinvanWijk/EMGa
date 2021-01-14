@@ -316,9 +316,9 @@ layout = html.Div([
             dbc.Row(
                 [
                     dbc.Col([
-                        html.Div([
-                            # leader_board.L_table()
-                        ], style={'marginTop': '1vw'}, )
+                        # html.Div([
+                        #     # leader_board.L_table()
+                        # ], style={'marginTop': '1vw'}, )
 
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
 
@@ -357,7 +357,18 @@ layout = html.Div([
                     #     ], style={'marginTop': '7vw'})
                     # ], width=3, lg=3, md=3, sm=3, style={'textAlign': 'center'}),
 
-                ], style={'height': '10vw'},
+                ], style={'height': '15vw'},
+            ),
+
+            dbc.Row(
+                [
+                    dbc.Col([
+
+                    ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
+
+                    dbc.Col([
+                    ], width=10, lg=10, md=10, sm=10),
+                ], style={'height': '1vw', 'backgroundColor': app.color_3},
             ),
 
             dbc.Row([
@@ -371,11 +382,15 @@ layout = html.Div([
 
                 ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
 
+                # html.Div([
+                #     # leader_board.L_table()
+                # ], style={'marginTop': '1vw'}, ),
+
                 dbc.Col([
                     html.Div([
                         user_data.table_data(),
                     ], style={'backgroundColor': app.color_1, 'height': '100%'}),
-                ], width=3, lg=3, md=3, sm=3),
+                ], width=3, lg=3, md=3, sm=3, align='center'),
 
                 dbc.Col([
                     html.Div([
