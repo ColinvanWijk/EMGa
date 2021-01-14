@@ -160,7 +160,7 @@ def display_page(pathname):
             # print(day)
             # print(len(app.WF_real_power) / 96)
 
-            if day >= len(app.WF_real_power) / 96:
+            if day >= app.play_days-1:#len(app.WF_real_power) / 96:
                 return page_end.layout
 
             return page_2.layout
@@ -211,7 +211,7 @@ def display_page(pathname):
             # print('OK')
 
             day = days[0]
-            if day >= app.play_days:#len(app.play_days) / 96:
+            if day >= app.play_days-1:#len(app.play_days) / 96:
                 return page_end.layout
             else:
                 return login.layout

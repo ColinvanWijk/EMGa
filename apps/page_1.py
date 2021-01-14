@@ -313,6 +313,8 @@ layout = html.Div([
 
             ]),
 
+
+
             dbc.Row(
                 [
                     dbc.Col([
@@ -369,6 +371,17 @@ layout = html.Div([
                     dbc.Col([
                     ], width=10, lg=10, md=10, sm=10),
                 ], style={'height': '1vw', 'backgroundColor': app.color_3},
+            ),
+
+            dbc.Row(
+                [
+                    dbc.Col([
+
+                    ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
+
+                    dbc.Col([
+                    ], width=10, lg=10, md=10, sm=10),
+                ], style={'height': '1vw'},
             ),
 
             dbc.Row([
@@ -630,7 +643,7 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
                 'borderWidth': '0.15vw', 'borderStyle': 'dashed',
                 'borderRadius': '1.5vw', 'textAlign': 'center', 'border-color': app.color_3,
                 'font-size': '1.2vw',
-                'color': app.color_3, 'backgroundColor': app.color_green,
+                'color': app.color_3, 'backgroundColor': app.color_icon,
             }
             name = filename
         else:
@@ -648,7 +661,7 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
                     'borderWidth': '0.15vw', 'borderStyle': 'dashed',
                     'borderRadius': '1.5vw', 'textAlign': 'center',
                     'border-color': app.color_7, 'font-size': '1.2vw',
-                    'color': app.color_3, 'backgroundColor': app.color_green,
+                    'color': app.color_3, 'backgroundColor': app.color_icon,
                 }
             name = existing_state
         disab = False
@@ -668,7 +681,7 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
                     'borderWidth': '0.15vw', 'borderStyle': 'dashed',
                     'borderRadius': '1.5vw', 'textAlign': 'center',
                     'border-color': app.color_3,
-                    'backgroundColor': app.color_green, 'font-size': '1.2vw', 'color': app.color_3
+                    'backgroundColor': app.color_icon, 'font-size': '1.2vw', 'color': app.color_3
                 }
                 if ok_P:
                     col = {
@@ -676,7 +689,7 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
                         'borderWidth': '0.15vw', 'borderStyle': 'dashed',
                         'borderRadius': '1.5vw', 'textAlign': 'center',
                         'border-color': app.color_3, 'font-size': '1.2vw',
-                        'backgroundColor': app.color_green,
+                        'backgroundColor': app.color_icon,
                         # 'backgroundColor':'green',
                     }
                 name = filename
@@ -715,7 +728,7 @@ def update_drag_bar(contents, P_value, clicks, ok_button, ok_P, filename, existi
                 'borderWidth': '0.15vw', 'borderStyle': 'dashed',
                 'borderRadius': '1.5vw', 'textAlign': 'center',
                 'border-color': app.color_8, 'font-size': '1.2vw',
-                'backgroundColor': app.color_green,
+                'backgroundColor': app.color_icon,
             }
             name = filename
             disab = False

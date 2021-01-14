@@ -72,6 +72,8 @@ app.color_icon = '#32e0c4'
 app.color_bar2 = '#4c5f87'
 app.color_line = '#00909e'
 app.color_bfig = '#dae1e7'
+
+
 ####
 #393e46
 
@@ -214,6 +216,7 @@ days_next_hist = days_next[time_mask]
 days_next_play = days_next[~time_mask]
 
 app.play_days = len(days_next_play) / 96
+
 
 # print(app.play_days)
 ################################
