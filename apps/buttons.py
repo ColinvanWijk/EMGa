@@ -189,64 +189,69 @@ def help_drag():
 
                     html.P(
                         dcc.Markdown(
-                            "**1)** Download past wind speed records by clicking on the `Download Historical Wind Data` "
-                            " button. Also, get the day-ahead prices from the `Download Day Ahead Prices` button."
+                            "**1)** You can download the updated historical data for your wind farm,"
+                            "  the day-ahead prices (updated for each trading day), and the imbalance factors."
+                            " Also, you can check the operational limits of your portfolio."
+                    # "Download past wind speed records by clicking on the `Download Historical Wind Data` "
+                    #         " button. Also, get the day-ahead prices from the `Download Day Ahead Prices` button."
                         ),
                     ),
                     html.P(
                         dcc.Markdown(
-                            "**2)** Generate a .csv file containing your expected hourly energy bids. The file structure "
-                            " must have 24 rows and 2 columns."
+                            "**2)** Use a forecasting technique to estimate the total hourly energy of your portfolio"
+                            " for the next trading day. Use the forecasted values to obtain a **`bid file`** using a "
+                            "decision making technique."
                         )
                     ),
 
                     html.P(
                         dcc.Markdown(
-                            ">***Obs.*** The **FIRST** column represents the time periods, i.e., \{t0, t1, ..., t23\},"
-                            "   while the **SECOND** column should contain the energy bid."
+                            ">***Obs.*** You can download a template file in the ***`Toolbox`*** section."
                         )
                     ),
 
                     html.P(
                         dcc.Markdown(
-                            "**3)** Check the uploaded data file in the table."
+                            "**3)** Upload and submit your **`bid file`**, containing the expected hourly energy bids obtained"
+                            " in step 2 separated by energy source. Your file must have extensions .csv or .xls"
+                            " and should contain **`25`** rows and **`5`** columns in total."
+                            " You can drag the file or select it from your computer. Check the uploaded data file in the table."
                         )
                     ),
 
                     html.P(
                         dcc.Markdown(
-                            "**4)** In case your data is OK, click on the `SUBMIT` button to "
-                            " continue and check the day's revenue."
+                            "**4)** Click on the **`TRADE`** button to submit your energy bids and continue playing."
                         ),
                     ),
 
                     html.P(
                         dcc.Markdown(
-                            "**5)** Four figures will be displayed where you can compare your"
-                            " uploaded bid with the actual energy production, check hourly energy mismatches, "
-                            " your revenue per hour, and the day accumulated revenue."
+                            "**5)** You will be redirected to the performance page, where you can review your day"
+                            " performance by comparing your actual revenue and the maximum revenue (perfect forecast)."
                         )
                     ),
 
                     html.P(
                         dcc.Markdown(
                             "**6)** After checking your revenue, you can continue to the next trading day "
-                            "by clicking on the button `Go to Next Day's Bid`."
+                            "by clicking on the button **`Go to Next Day's Bid`**."
                         )
                     ),
 
                     html.P(
                         dcc.Markdown(
-                            "**7)** You must repeat steps **1)**--**6)** for a predefined number of days (time horizon). "
-                            " You can leave your current session anytime by logging out clicking on the `LOGOUT` button."
-                            " Don't worry, your process **will not be lost**."
+                            "**7)** Once you click on the **`Go to Next Day's Bid`** button, you will be redirected back to"
+                            " the main page. To continue with the game, repeat this guide from step 2. "
                         )
                     ),
 
                     html.P(
                         dcc.Markdown(
-                            "**8)** Once you have completed the time horizon, you will not be able to make any other bid. "
-                            " You can always re-enter using your username/password and review your current position in the Leaderboard."
+                            "**8)** The game finishes when there are no more available trading days. You will be"
+                            " immediately redirected to the summary page where you can see your final stats. When all"
+                            " players have finished the game, the **WINNER** will be the player that appears in the"
+                            " first position of the **`Leaderboard`**."
                         )
                     ),
 
@@ -264,21 +269,21 @@ def help_drag():
 
                     html.P(
                         dcc.Markdown(
-                            "**1)** You can check the **leaderboard** by clicking on the `LEADERBOARD` button."
+                            "**1)** You can check the **leaderboard** by clicking on the **`LEADERBOARD`** button."
                         )
                     ),
 
                   html.P(
                       dcc.Markdown(
                           "**2)** The **leaderboard** displays your accumulated revenue, "
-                          " the number of days you have played, and your `Rate`."
+                          " the number of days you have played, and your **`Rate`**."
                       )
                   ),
 
                 html.P(
                     dcc.Markdown(
-                        "**3)** The `Rate` is the ratio between your `Accumulated Revenue`/`Played days`. "
-                        " The `Rate` is the measurement for the game's ranking... "
+                        "**3)** The **`Rate`** is the ratio between your **`Accumulated Revenue`**/**`Played days`**. "
+                        " The **`Rate`** is the measurement for the game's ranking... "
                         "**So keep it as high as possible!!**"
                     )
                 )

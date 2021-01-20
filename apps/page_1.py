@@ -317,12 +317,31 @@ layout = html.Div([
 
             dbc.Row(
                 [
+
                     dbc.Col([
-                        # html.Div([
-                        #     # leader_board.L_table()
-                        # ], style={'marginTop': '1vw'}, )
+                        html.B('Toolbox',
+                               style={'font-size': '1.7vw', 'color': app.color_4, 'width': '100%', 'height': '1.5vw'}),
+
+                                    buttons.port_info(),
 
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
+                    # dbc.Col([
+                    #     # html.Div([
+                    #     #     # leader_board.L_table()
+                    #     # ], style={'marginTop': '1vw'}, )
+                    #
+                    # ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
+
+                    # dbc.Col([ # PORTFOLIO
+                    #     html.Div([
+                    #         # dcc.Loading([
+                    #         html.Div([
+                    #             buttons.port_info(),
+                    #         ], ),
+                    #         # ],id='loading_port', color=app.color_3, type='default'),
+                    #
+                    #     ], )
+                    # ], width=3, lg=3, md=3, sm=3, style={'textAlign': 'center'}),
 
                     dbc.Col([
 
