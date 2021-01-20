@@ -185,19 +185,30 @@ layout = html.Div([
                         tue_header.curr_date(),
                     ], width=4, lg=4, md=4, sm=4, align="center"),
 
-                    dbc.Col([
 
-                        html.Div([
-                            buttons.download_irrad(),
-                        ], style={'textAlign': 'center'}),
-                    ], width=3, lg=3, md=3, sm=3, align="start"),
+                        dbc.Col([
+
+                            html.Div([
+                                # buttons.download_data(),
+                            ], style={'textAlign': 'center'}),
+                        ], width=2, lg=2, md=2, sm=2, align="start"),
+
 
                     dbc.Col([
 
                         html.Div([
                             buttons.download_data(),
                         ], style={'textAlign': 'center'}),
-                    ], width=3, lg=3, md=3, sm=3, align="start"),
+                    ], width=2, lg=2, md=2, sm=2, align="start"),
+
+                        dbc.Col([
+
+                            html.Div([
+                                # buttons.download_data(),
+                            ], style={'textAlign': 'center'}),
+                        ], width=2, lg=2, md=2, sm=2, align="start"),
+
+
 
 
 
@@ -225,14 +236,14 @@ layout = html.Div([
                         html.Div([
                             buttons.download_DAP()
                         ], style={'textAlign': 'center'}),
-                    ], width=3, lg=3, md=3, sm=3),
+                    ], width=3, lg=3, md=3, sm=3, align="start"),
 
                     dbc.Col([
 
                         html.Div([
                             buttons.imb_factors(),
                         ], style={'textAlign': 'center'}),
-                    ], width=3, lg=3, md=3, sm=3),
+                    ], width=3, lg=3, md=3, sm=3, align="start"),
 
                     # dbc.Col([ # PORTFOLIO
                     #     html.Div([
