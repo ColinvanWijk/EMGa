@@ -82,18 +82,18 @@ def download_irrad():
     ])
     return I
 
-def port_info():
-    G = html.Div([
-
-        html.A(dcc.Loading(id='loading_4', color=app.color_3, type='default'),
-               id='port_dwnl',
-               download="",
-               href="",
-               target="_blank"
-               ),
-        ])
-
-    return G
+# def port_info():
+#     G = html.Div([
+#
+#         html.A(dcc.Loading(id='loading_4', color=app.color_3, type='default'),
+#                id='port_dwnl',
+#                download="",
+#                href="",
+#                target="_blank"
+#                ),
+#         ])
+#
+#     return G
 
 
 def download_DAP():

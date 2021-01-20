@@ -477,6 +477,32 @@ hr {
   content: "";
   display: table;
   clear: both; }
+  
+  
+.twocolors span.red {
+    color: #000;
+    text-decoration: none;
+    }
+.twocolors:hover span.red {
+    color: #FF0000;
+    text-decoration: none;
+    }
+.twocolors span.blue {
+    color: #000;
+    text-decoration: none;
+    }
+.twocolors:hover span.blue {
+    color: #0000FF;
+    text-decoration: none;
+    }
+.twocolors span.normal {
+    color: #eeeeee;
+    text-decoration: none;
+    }
+.twocolors:hover span.normal {
+    color: #32e0c4;
+    text-decoration: none;
+    }
 
 
 /* Media Queries

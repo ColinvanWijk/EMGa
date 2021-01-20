@@ -112,14 +112,14 @@ button4 = html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/portfolio_1.svg',
                  alt="Avatar", className="image",
                  title='Portfolio',
-                 style={'height': '6vw','width': '6vw'}
+                 style={'height': '2vw','width': '2vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/portfolio.svg',
                 alt="Avatar", className="image",
                 title='Portfolio',
-                style={'height': '6vw','width': '6vw'}
+                style={'height': '2vw','width': '2vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
@@ -333,7 +333,27 @@ layout = html.Div([
                         html.B('Toolbox',
                                style={'font-size': '1.7vw', 'color': app.color_4, 'width': '100%', 'height': '1.5vw'}),
 
-                                    buttons.port_info(),
+                        html.Br(),
+                        html.Br(),
+
+                        html.Div([
+                                html.A(
+                                    html.Span(
+                                    html.U('Download Portfolio info.'),
+                                       style={'font-size': '1.2vw'}, className="normal"),
+                                    className="twocolors", id='port_dwnl', download="", href="", target="_blank",),
+                            ], style={'display': 'inline-block', 'textAlign': 'center'}),
+
+                        html.Br(),
+
+                        html.Div([
+                            html.A(
+                                html.Span(
+                                    html.U('Download Game Manual'),
+                                    style={'font-size': '1.2vw'}, className="normal"),
+                                className="twocolors", id='manual_dwnl', download="",
+                                href='/assets/Game_manual_portfolio.pdf', target="_blank", ),
+                        ], style={'display': 'inline-block', 'textAlign': 'center'}),
 
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
                     # dbc.Col([
