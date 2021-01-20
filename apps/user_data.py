@@ -14,9 +14,7 @@ def drag_file():
     file = html.Div([
 
         dbc.Tooltip(
-            "Upload and submit your bid file separated by energy source."
-            " Your file must have extensions .csv or .xls and should contain 25 rows and 5 columns in total."
-            " Check the uploaded data file in the table below.",
+            " Your file must have extensions .csv or .xls and should contain 25 rows and 5 columns in total.",
             target="Drag_file", placement='right', style={'font-size': '0.7vw'}
         ),
         dcc.Upload(
