@@ -14,7 +14,8 @@ def drag_file():
     file = html.Div([
 
         dbc.Tooltip(
-            " Your file must have extensions .csv or .xls and should contain 25 rows and 5 columns in total.",
+            "Your file must have extensions .csv or .xls and should contain 25 rows and 5 columns in total."
+            " Check the uploaded data file in the table below.",
             target="Drag_file", placement='right', style={'font-size': '0.7vw'}
         ),
         dcc.Upload(
