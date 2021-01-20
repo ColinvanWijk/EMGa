@@ -53,18 +53,20 @@ button1 = html.Div([
     html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/wind_tu1.svg',
                  alt="Avatar", className="image",
-                 title='Download Historical Wind Data',
+                 title='',
                  style={'height': '10vw','width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/wind_tu_2.svg',
                 alt="Avatar", className="image",
-                title='Download Historical Wind Data',
+                title='',
                 style={'height': '10vw', 'width': '10vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
+
+
 
 ])
 
@@ -72,14 +74,14 @@ button2 = html.Div([
     html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/stocks1.svg',
                  alt="Avatar", className="image",
-                 title='Download Day Ahead Data',
+                 title='',
                  style={'height': '10vw','width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/stocks_2.svg',
                 alt="Avatar", className="image",
-                title='Download Day Ahead Data',
+                title='',
                 style={'height': '10vw','width': '10vw'}
             ),
         ], className="overlay"),
@@ -91,14 +93,14 @@ button3 = html.Div([
     html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/solar_tu.svg',
                  alt="Avatar", className="image",
-                 title='Download Historical Irradiation',
+                 title='',
                  style={'height': '10vw','width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/solar_tu2.svg',
                 alt="Avatar", className="image",
-                title='Download Historical Irradiation',
+                title='',
                 style={'height': '10vw','width': '10vw'}
             ),
         ], className="overlay"),
@@ -111,14 +113,14 @@ button4 = html.Div([
     html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/portfolio_1.svg',
                  alt="Avatar", className="image",
-                 title='Portfolio',
+                 title='',
                  style={'height': '2vw','width': '2vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/portfolio.svg',
                 alt="Avatar", className="image",
-                title='Portfolio',
+                title='',
                 style={'height': '2vw','width': '2vw'}
             ),
         ], className="overlay"),
@@ -131,14 +133,14 @@ button5 = html.Div([
     html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/imb_tu1.svg',
                  alt="Avatar", className="image",
-                 title='Portfolio',
+                 title='',
                  style={'height': '10vw','width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/imb_tu2.svg',
                 alt="Avatar", className="image",
-                title='Portfolio',
+                title='',
                 style={'height': '10vw','width': '10vw'}
             ),
         ], className="overlay"),
@@ -337,9 +339,13 @@ layout = html.Div([
                         html.Br(),
 
                         html.Div([
+                            dbc.Tooltip(
+                                "Donwload the information of your portfolio (nominal power, operational limits, etc.)",
+                                target="port_dwnl", placement='right', style={'font-size': '0.7vw'}
+                            ),
                                 html.A(
                                     html.Span(
-                                    html.U('Download Portfolio info.'),
+                                    html.U('Portfolio information'),
                                        style={'font-size': '1.2vw'}, className="normal"),
                                     className="twocolors", id='port_dwnl', download="", href="", target="_blank",),
                             ], style={'display': 'inline-block', 'textAlign': 'center'}),
@@ -347,9 +353,13 @@ layout = html.Div([
                         html.Br(),
 
                         html.Div([
+                            dbc.Tooltip(
+                                "Donwload the game manual",
+                                target="manual_dwnl", placement='right', style={'font-size': '0.7vw'}
+                            ),
                             html.A(
                                 html.Span(
-                                    html.U('Download Game Manual'),
+                                    html.U('Game Manual'),
                                     style={'font-size': '1.2vw'}, className="normal"),
                                 className="twocolors", id='manual_dwnl', download="",
                                 href='/assets/Game_manual_portfolio.pdf', target="_blank", ),
@@ -1332,8 +1342,8 @@ def update_download_link(n_clicks):
         sifile = 'solarIrrad_{}.csv'.format(
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
-        return csv_string, ' Download Updated Historical Data', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False,\
-                False, ' Download Day Ahead Prices', imbfile, csv_string_imbF, button1, button2, button3, button5
+        return csv_string, '', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False,\
+                False, '', imbfile, csv_string_imbF, button1, button2, button3, button5
 
 
     else:

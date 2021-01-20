@@ -3,6 +3,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_table as dt
 from app import app
+import dash_bootstrap_components as dbc
+
 
 
 
@@ -10,6 +12,13 @@ from app import app
 # ---------- LOAD BID_FILE ----------- #
 def drag_file():
     file = html.Div([
+
+        dbc.Tooltip(
+            "Upload and submit your bid file separated by energy source."
+            " Your file must have extensions .csv or .xls and should contain 25 rows and 5 columns in total."
+            " Check the uploaded data file in the table below.",
+            target="Drag_file", placement='right', style={'font-size': '0.7vw'}
+        ),
         dcc.Upload(
             id='Drag_file',
             children=html.Div([

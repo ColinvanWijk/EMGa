@@ -64,7 +64,14 @@ def download_data():
                    ),
         ]),  #
 
+    dbc.Tooltip(
+        "Historical 10-minute wind speed data.",
+        target="link_downl", placement='right', style={'font-size': '0.7vw'}
+    ),
+
     ])
+
+
     return C
 
 def download_irrad():
@@ -108,6 +115,11 @@ def download_DAP():
                    ),
         ]),  #
 
+    dbc.Tooltip(
+        "Historical hourly day-ahead prices.",
+        target="link_downl_dap", placement='right', style={'font-size': '0.7vw'}
+    ),
+
     ])
     return D
 
@@ -122,6 +134,11 @@ def imb_factors():
                    target="_blank"
                    ),
         ]),  #
+
+    dbc.Tooltip(
+        "Hourly imbalance factors (known data for current trading day).",
+        target="link_downl_imb", placement='right', style={'font-size': '0.7vw'}
+    ),
 
     ])
     return FF
@@ -173,6 +190,11 @@ def help_drag():
 
                 ], id='your_button', style={'height': '3vw', 'border': 'none', 'background': 'none'}
                 ),
+
+    dbc.Tooltip(
+        "Game guidelines",
+        target="your_button", placement='right', style={'font-size': '0.7vw'}
+    ),
 
             ], style={'display': 'inline-block', 'textAlign': 'center'}
             ),

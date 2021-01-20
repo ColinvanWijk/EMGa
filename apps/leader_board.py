@@ -20,6 +20,10 @@ params = [
 def L_table():
     A = html.Div(
         [
+            dbc.Tooltip(
+                "Scoreboard showing the usernames and current scores of the competitors",
+                target="popover-target", placement='right', style={'font-size': '0.7vw'}
+            ),
             html.Button(
                 "Leaderboard", id="popover-target", className='button-primary',
                 style={'font-size': '1.0vw', 'height': '2vw', 'width': '100%', 'textAlign': 'center'}
