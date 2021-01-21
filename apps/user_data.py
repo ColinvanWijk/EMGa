@@ -16,21 +16,25 @@ def drag_file():
         dbc.Tooltip(
             "Your file must have extensions .csv or .xls and should contain 25 rows and 5 columns in total."
             " Check the uploaded data file in the table below.",
-            target="Drag_file", placement='right', style={'font-size': '0.7vw'}
+            target="drag_bid", placement='right', style={'font-size': '0.7vw'}
         ),
-        dcc.Upload(
-            id='Drag_file',
-            children=html.Div([
-                'Drag and Drop or ',
-                html.A('Select Bid File', style={'color': app.color_line})
-            ],style={'color': app.color_3}),
-            style={
-                'width': '25vw', 'height': '3vw', 'lineHeight': '2.5vw',
-                'borderWidth': '0.15vw', 'borderStyle': 'ridge',
-                'borderRadius': '1.5vw', 'textAlign': 'center', 'border-color': app.color_3,
-                'backgroundColor': app.color_1, 'font-size': '1.2vw'
-            },
-        ),
+
+        html.Div([
+            dcc.Upload(
+                id='Drag_file',
+                children=html.Div([
+                    'Drag and Drop or ',
+                    html.A('Select Bid File', style={'color': app.color_line})
+                ], style={'color': app.color_3}),
+                style={
+                    'width': '25vw', 'height': '3vw', 'lineHeight': '2.5vw',
+                    'borderWidth': '0.15vw', 'borderStyle': 'ridge',
+                    'borderRadius': '1.5vw', 'textAlign': 'center', 'border-color': app.color_3,
+                    'backgroundColor': app.color_1, 'font-size': '1.2vw'
+                },
+            ),
+        ], id='drag_bid'),
+
     ], style={'textAlign': 'center', },)
 
     return file
