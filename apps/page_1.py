@@ -48,13 +48,12 @@ user_pwd, user_names = users_info()
 
 play_days = app.play_days
 
-
 button1 = html.Div([
     html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/wind_tu1.svg',
                  alt="Avatar", className="image",
                  title='',
-                 style={'height': '10vw','width': '10vw'}
+                 style={'height': '10vw', 'width': '10vw'}
                  ),
         html.Div([
             html.Img(
@@ -66,8 +65,6 @@ button1 = html.Div([
         ], className="overlay"),
     ], className="container", ),
 
-
-
 ])
 
 button2 = html.Div([
@@ -75,14 +72,14 @@ button2 = html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/stocks1.svg',
                  alt="Avatar", className="image",
                  title='',
-                 style={'height': '10vw','width': '10vw'}
+                 style={'height': '10vw', 'width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/stocks_2.svg',
                 alt="Avatar", className="image",
                 title='',
-                style={'height': '10vw','width': '10vw'}
+                style={'height': '10vw', 'width': '10vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
@@ -94,59 +91,59 @@ button3 = html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/solar_tu.svg',
                  alt="Avatar", className="image",
                  title='',
-                 style={'height': '10vw','width': '10vw'}
+                 style={'height': '10vw', 'width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/solar_tu2.svg',
                 alt="Avatar", className="image",
                 title='',
-                style={'height': '10vw','width': '10vw'}
+                style={'height': '10vw', 'width': '10vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
 
 ])
-
 
 button4 = html.Div([
     html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/portfolio_1.svg',
                  alt="Avatar", className="image",
                  title='',
-                 style={'height': '2vw','width': '2vw'}
+                 style={'height': '2vw', 'width': '2vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/portfolio.svg',
                 alt="Avatar", className="image",
                 title='',
-                style={'height': '2vw','width': '2vw'}
+                style={'height': '2vw', 'width': '2vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
 
 ])
-
 
 button5 = html.Div([
     html.Div([
         html.Img(src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/imb_tu1.svg',
                  alt="Avatar", className="image",
                  title='',
-                 style={'height': '10vw','width': '10vw'}
+                 style={'height': '10vw', 'width': '10vw'}
                  ),
         html.Div([
             html.Img(
                 src='https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/imb_tu2.svg',
                 alt="Avatar", className="image",
                 title='',
-                style={'height': '10vw','width': '10vw'}
+                style={'height': '10vw', 'width': '10vw'}
             ),
         ], className="overlay"),
     ], className="container", ),
 
 ])
+
+
 
 # ##################### - FIRST PAGE - ############################
 layout = html.Div([
@@ -174,10 +171,9 @@ layout = html.Div([
             dbc.Row(
                 [
 
-
                     dbc.Col([
                         html.B('My Performance',
-                               style={'font-size': '1.7vw','color':app.color_4, 'width': '100%', 'height':'1.5vw'}),
+                               style={'font-size': '1.7vw', 'color': app.color_4, 'width': '100%', 'height': '1.5vw'}),
 
                         score_info.position_lead(),
 
@@ -187,14 +183,12 @@ layout = html.Div([
                         tue_header.curr_date(),
                     ], width=4, lg=4, md=4, sm=4, align="center"),
 
+                    dbc.Col([
 
-                        dbc.Col([
-
-                            html.Div([
-                                # buttons.download_data(),
-                            ], style={'textAlign': 'center'}),
-                        ], width=2, lg=2, md=2, sm=2, align="start"),
-
+                        html.Div([
+                            # buttons.download_data(),
+                        ], style={'textAlign': 'center'}),
+                    ], width=2, lg=2, md=2, sm=2, align="start"),
 
                     dbc.Col([
 
@@ -203,16 +197,13 @@ layout = html.Div([
                         ], style={'textAlign': 'center'}),
                     ], width=2, lg=2, md=2, sm=2, align="start"),
 
-                        dbc.Col([
+                    dbc.Col([
 
-                            html.Div([
-                                # buttons.download_data(),
-                            ], style={'textAlign': 'center'}),
-                        ], width=2, lg=2, md=2, sm=2, align="start"),
-
-
-
-
+                        # html.Div([
+                        #     dcc.Loading(id='loading_test'),
+                        #     # buttons.download_data(),
+                        # ], style={'textAlign': 'center'}),
+                    ], width=2, lg=2, md=2, sm=2, align="start"),
 
                     # dbc.Col([
                     #     # tue_header.curr_date(),
@@ -269,8 +260,6 @@ layout = html.Div([
 
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3}),
 
-
-
                     dbc.Col([
 
                         html.Div([
@@ -287,8 +276,6 @@ layout = html.Div([
 
                         ], )
                     ], width=5, lg=5, md=5, sm=5, style={'textAlign': 'center'}),
-
-
 
                 ], style={'height': '4vw'}, justify="between"
             ),
@@ -309,11 +296,9 @@ layout = html.Div([
 
                 ], width=1, lg=1, md=1, sm=1, style={'textAlign': 'center'}),
 
-
-
                 dbc.Col([
 
-                    dbc.Alert("",id='alert_indic', is_open=False),
+                    dbc.Alert("", id='alert_indic', is_open=False),
 
                 ], width=8, lg=8, md=8, sm=8, style={'textAlign': 'center'}
                 ),
@@ -325,8 +310,6 @@ layout = html.Div([
                 ),
 
             ]),
-
-
 
             dbc.Row(
                 [
@@ -343,12 +326,12 @@ layout = html.Div([
                                 "Donwload the information of your portfolio (nominal power, operational limits, etc.)",
                                 target="port_dwnl", placement='right', style={'font-size': '0.7vw'}
                             ),
-                                html.A(
-                                    html.Span(
+                            html.A(
+                                html.Span(
                                     html.U('Portfolio information'),
-                                       style={'font-size': '1.2vw'}, className="normal"),
-                                    className="twocolors", id='port_dwnl', download="", href="", target="_blank",),
-                            ], style={'display': 'inline-block', 'textAlign': 'center'}),
+                                    style={'font-size': '1.2vw'}, className="normal"),
+                                className="twocolors", id='port_dwnl', download="", href="", target="_blank", ),
+                        ], style={'display': 'inline-block', 'textAlign': 'center'}),
 
                         html.Br(),
 
@@ -386,7 +369,6 @@ layout = html.Div([
 
                     dbc.Col([
 
-
                         # html.Div([
                         #     buttons.port_info(),
                         # ]),
@@ -397,8 +379,6 @@ layout = html.Div([
                         html.Div([
                             user_data.nominal_P(),
                         ], style={'display': 'none', 'marginTop': '7vw'}),
-
-
 
                         html.Div([
                             user_data.drag_file(),
@@ -513,7 +493,6 @@ def parse_contents(contents, filename):
         # Assume that the user uploaded a CSV file
         df = pd.read_csv(io.StringIO(decoded.decode('utf-8')))
 
-
         if (len(df.axes[1]) == 5) and (len(df.axes[0]) == 24):
             return df
         else:
@@ -536,9 +515,9 @@ def parse_contents(contents, filename):
 @app.callback(Output('Counter_day', 'children'),
               # Output('link_downl', 'href')],
               [Input('Counter_day', 'contents'),
-                Input('Page_1', 'id')
+               Input('Page_1', 'id')
                ])
-def display_confirm(day,page):
+def display_confirm(day, page):
     user_active = flask.request.cookies.get('custom-auth-session')
 
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -549,8 +528,6 @@ def display_confirm(day,page):
 
     # print(players)
     days = cur.fetchone()
-
-
 
     cur.close()
     conn.close()
@@ -650,11 +627,9 @@ def display_confirm(contents, filename):
 
         if df is not None:
 
-
             df.loc[1:] = df.loc[1:].apply(pd.to_numeric, errors='coerce')
 
             df = df.fillna(0)
-
 
             df_1 = df.to_json()
             dash.callback_context.response.set_cookie('ddf', str(df_1), max_age=7200)
@@ -933,10 +908,6 @@ def update_texts(contents, P_value, clicks, ok_button, filename):
                Input('button', 'n_clicks'), ],
               [State('Drag_file', 'filename')])
 def bid_bigger_nominal(contents, P_value, clicks, filename):
-
-
-
-
     if (P_value > 0 and contents is not None and clicks is None):
         df = parse_contents(contents, filename)
 
@@ -984,8 +955,6 @@ def table_format(contents, filename):
                 return True
         else:
             return True
-
-
 
 
 ## UPDATE SCORE FIGURE
@@ -1077,8 +1046,8 @@ def score_fig(nome):
                Output('loading_1', 'children'),
                Output('loading_2', 'children'),
                Output('loading_3', 'children'),
-               Output('loading_5', 'children'),],
-              [Input('Page_1', 'id'),],
+               Output('loading_5', 'children'), ],
+              [Input('Counter_day', 'children') ],
               # [State('wind_hist', 'data'),
               #  # State('irrad_hist', 'data')
               #  ]
@@ -1108,13 +1077,7 @@ def update_download_link(n_clicks):
 
     tn = pd.Series('t{}'.format(i) for i in range(1, 25))
 
-
-    df_imb = pd.DataFrame({'': tn, 'Lam Positive': ubpr_pos, 'Lam Negative':ubpr_neg})
-
-
-
-
-
+    df_imb = pd.DataFrame({'': tn, 'Lam Positive': ubpr_pos, 'Lam Negative': ubpr_neg})
 
     # print(dff)
 
@@ -1125,10 +1088,10 @@ def update_download_link(n_clicks):
 
         PV_irradiation = app.PV_irradiation
 
-
         PV_irradiation['DateTime'] = pd.to_datetime(PV_irradiation['DateTime'], format="%d/%m/%Y %H:%M")
 
-        time_mask = PV_irradiation['DateTime'] <= PV_irradiation['DateTime'].iloc[-1] - datetime.timedelta(days=play_days - b2)
+        time_mask = PV_irradiation['DateTime'] <= PV_irradiation['DateTime'].iloc[-1] - datetime.timedelta(
+            days=play_days - b2)
 
         dates_irrad = PV_irradiation['DateTime'][time_mask]
 
@@ -1151,12 +1114,10 @@ def update_download_link(n_clicks):
 
         WT_speed = app.wind_data
 
-
         WT_speed['DateTime'] = pd.to_datetime(WT_speed['DateTime'], format="%d/%m/%Y %H:%M")
         # WT_speed_dates_hist = WT_speed['DateTime']
 
         time_mask = WT_speed['DateTime'] <= WT_speed['DateTime'].iloc[-1] - datetime.timedelta(days=play_days - b2)
-
 
         dates_wind = WT_speed['DateTime'][time_mask]
 
@@ -1174,18 +1135,15 @@ def update_download_link(n_clicks):
         ################################
         ################################
 
-
         ################################
         ################################
 
         DAP_historic = app.DAP_historic
 
-
         DAP_historic['Date'] = pd.to_datetime(DAP_historic['Date'], format="%d/%m/%Y %H:%M")
         # WT_speed_dates_hist = WT_speed['DateTime']
 
         time_mask = DAP_historic['Date'] <= DAP_historic['Date'].iloc[-1] - datetime.timedelta(days=play_days - b2)
-
 
         dates_dap = DAP_historic['Date'][time_mask]
 
@@ -1200,11 +1158,8 @@ def update_download_link(n_clicks):
         DAP_play = DAP_historic[~time_mask]
         DAP_play = DAP_play[0 + 24 * b2:24 * (b2 + 1)]
 
-
         ################################
         ################################
-
-
 
         wf_power = pd.DataFrame(WT_speed_hist, columns=['DateTime', 'Measured'])
 
@@ -1216,19 +1171,15 @@ def update_download_link(n_clicks):
         irrad_power['DateTime'] = pd.to_datetime(irrad_power['DateTime'])
         irrad_power['DateTime'] = irrad_power['DateTime'].dt.strftime('%Y-%m-%d %H:%M')
 
-
         dap_day = pd.DataFrame(DAP_hist, columns=['Date', 'Day-ahead Price [EUR/MWh]'])
 
         dap_day['Date'] = pd.to_datetime(dap_day['Date'])
         dap_day['Date'] = dap_day['Date'].dt.strftime('%Y-%m-%d %H:%M')
 
-
-
         # nd1 = (app.dates_nextday.iloc[(b2 - 1) * 144:144 * (b2 - 1) + 144]).to_frame()
         nd1 = WT_speed_play
         nd1_i = PV_irradiation_play
         nd1_dap = DAP_play
-
 
         # print((WT_speed_hist.iloc[-1, 0]))
         # print(type(datetime.timedelta(minutes=10)))
@@ -1247,38 +1198,34 @@ def update_download_link(n_clicks):
         # print(nd1)
         nd1_dap = nd1_dap.drop('index', 1)
 
-
-
         idx = pd.date_range(
-            datetime.datetime.strptime(str(WT_speed_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(minutes=10),
+            datetime.datetime.strptime(str(WT_speed_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(
+                minutes=10),
             periods=144, freq='10T')
 
         idx_i = pd.date_range(
-            datetime.datetime.strptime(str(PV_irradiation_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(minutes=15),
+            datetime.datetime.strptime(str(PV_irradiation_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(
+                minutes=15),
             periods=96, freq='15T')
 
         idx_dap = pd.date_range(
             datetime.datetime.strptime(str(DAP_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(hours=1),
             periods=24, freq='1H')
 
-
         ze = np.zeros((len(idx), 1))
         ndz = pd.DataFrame(ze, index=idx)
         ndz = ndz.reset_index()
         ndz = ndz.rename(columns={'index': 'DateTime', 0: 'Measured'})
-
 
         ze_i = np.zeros((len(idx_i), 1))
         ndz_i = pd.DataFrame(ze_i, index=idx_i)
         ndz_i = ndz_i.reset_index()
         ndz_i = ndz_i.rename(columns={'index': 'DateTime', 0: 'Irradiation [kW/m2]'})
 
-
         ze_dap = np.zeros((len(idx_dap), 1))
         ndz_dap = pd.DataFrame(ze_dap, index=idx_dap)
         ndz_dap = ndz_dap.reset_index()
         ndz_dap = ndz_dap.rename(columns={'index': 'Date', 0: 'Day-ahead Price [EUR/MWh]'})
-
 
         dff2 = wf_power.append((ndz), ignore_index=True)
         dff2 = dff2.rename(columns={'DateTime': 'Date', 0: 'speed'})
@@ -1295,8 +1242,6 @@ def update_download_link(n_clicks):
         wf_power = json.dumps(b, default=json_util.default)
         # print(wf_power)
 
-
-
         dff2_i = irrad_power.append((ndz_i), ignore_index=True)
         # dff2_i = dff2_i.rename(columns={'DateTime': 'date', 'Irradiation [kW/m2]': 'Irradiation'})
 
@@ -1308,7 +1253,6 @@ def update_download_link(n_clicks):
         # b_i = a_i.tolist()
         # irrad_power = json.dumps(b_i, default=json_util.default)
         # print(wf_power)
-
 
         tn = pd.Series('t{}'.format(i) for i in range(1, 25))
         pr = pd.DataFrame(app.prices)
@@ -1342,28 +1286,24 @@ def update_download_link(n_clicks):
         sifile = 'solarIrrad_{}.csv'.format(
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
-        return csv_string, '', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False,\
-                False, '', imbfile, csv_string_imbF, button1, button2, button3, button5
+        return csv_string, '', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False, \
+               False, '', imbfile, csv_string_imbF, button1, button2, button3, button5
 
 
     else:
-
 
         ################################
         ################################
 
         PV_irradiation = app.PV_irradiation
 
-
-
-
         # PV_irradiation = pd.DataFrame(PV_irradiation)
-
 
         PV_irradiation['DateTime'] = pd.to_datetime(PV_irradiation['DateTime'], format="%d/%m/%Y %H:%M")
         # PV_irradiation_dates_hist = PV_irradiation['DateTime']
 
-        time_mask = PV_irradiation['DateTime'] <= PV_irradiation['DateTime'].iloc[-1] - datetime.timedelta(days=play_days)
+        time_mask = PV_irradiation['DateTime'] <= PV_irradiation['DateTime'].iloc[-1] - datetime.timedelta(
+            days=play_days)
 
         dates_irrad = PV_irradiation['DateTime'][time_mask]
 
@@ -1386,13 +1326,13 @@ def update_download_link(n_clicks):
 
         b = a.tolist()
 
-
         # a = PV_irradiation_hist
         #
         # b = a.tolist()
 
         idx = pd.date_range(
-            (datetime.datetime.strptime(str(PV_irradiation_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(minutes=15)),
+            (datetime.datetime.strptime(str(PV_irradiation_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(
+                minutes=15)),
             periods=96, freq='15T')
         # print(idx)
         ze = np.zeros((len(idx), 1))
@@ -1402,21 +1342,18 @@ def update_download_link(n_clicks):
         ndz = ndz.rename(columns={'index': 'date', 0: 'irradiation'})
         irradiation = json.dumps(b, default=json_util.default)
 
-        dff = PV_irradiation_hist#app.dates_irrad1
+        dff = PV_irradiation_hist  # app.dates_irrad1
         dff = dff.reset_index()
         dff = dff.rename(columns={'DateTime': 'date', 'Irradiation [kW/m2]': 'irradiation'})
         dff_irrad = dff.append((ndz), ignore_index=True)
-        dff_irrad= dff_irrad.drop('index', 1)
+        dff_irrad = dff_irrad.drop('index', 1)
 
         # dff_irrad = dff_irrad.reset_index('date')
-
-
 
         ################################
         ################################
 
         WT_speed = app.wind_data
-
 
         WT_speed['DateTime'] = pd.to_datetime(WT_speed['DateTime'], format="%d/%m/%Y %H:%M")
         # WT_speed_dates_hist = WT_speed['DateTime']
@@ -1438,12 +1375,10 @@ def update_download_link(n_clicks):
         ################################
         ################################
 
-
         ################################
         ################################
 
         DAP_historic = app.DAP_historic
-
 
         DAP_historic['Date'] = pd.to_datetime(DAP_historic['Date'], format="%d/%m/%Y %H:%M")
         # WT_speed_dates_hist = WT_speed['DateTime']
@@ -1463,7 +1398,6 @@ def update_download_link(n_clicks):
         DAP_play = DAP_historic[~time_mask]
         DAP_play = DAP_play[0 + 24 * b2:24 * (b2 + 1)]
 
-
         dap_day = pd.DataFrame(DAP_hist, columns=['Date', 'Day-ahead Price [EUR/MWh]'])
 
         dap_day['Date'] = pd.to_datetime(dap_day['Date'])
@@ -1482,18 +1416,15 @@ def update_download_link(n_clicks):
         csv_string_dap = dff_dap.to_csv(index=False, header=True, encoding='utf-8')
         csv_string_dap = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_dap)
 
-
         csv_string_imbF = df_imb.to_csv(index=False, header=True, encoding='utf-8')
         csv_string_imbF = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_imbF)
 
         ################################
         ################################
 
-
         p_wf_power = WT_speed_hist
 
         aa = WT_speed_hist
-
 
         a = aa.to_numpy()
 
@@ -1613,12 +1544,13 @@ def toggle_popover(n, is_open):
     ]
     # data = df.to_dict()
 
-    sdf= {'resize': 'none', #'width': '50%', 'height': '1%',
-                            'borderColor': app.color_3,'textAlign': 'center','backgroundColor':app.color_3, 'color':app.color_8, 'font-size': '1.2vw','width': '100%',
-                            'height':'3vw'}
+    sdf = {'resize': 'none',  # 'width': '50%', 'height': '1%',
+           'borderColor': app.color_3, 'textAlign': 'center', 'backgroundColor': app.color_3, 'color': app.color_8,
+           'font-size': '1.2vw', 'width': '100%',
+           'height': '3vw'}
     if n:
-        return not is_open, data, columns, '#'+f'{int(int(a[0]))}', sdf, style_data_conditional
-    return is_open, data, columns, '#'+f'{int(int(a[0]))}', sdf, style_data_conditional
+        return not is_open, data, columns, '#' + f'{int(int(a[0]))}', sdf, style_data_conditional
+    return is_open, data, columns, '#' + f'{int(int(a[0]))}', sdf, style_data_conditional
 
 
 # ----------  UPDATE SCOREBOARD ----------- #
@@ -1707,15 +1639,16 @@ def toggle_modal(n1, n2, is_open):
         return not is_open
     return is_open
 
+
 # WARNING TEXT
 @app.callback(
     [Output("alert_indic", "is_open"),
      Output("alert_indic", "children"),
-     Output('alert_indic','color'),
+     Output('alert_indic', 'color'),
      Output("alert_indic", "disabled"),
      ],
     [Input('Drag_file', 'contents'),
-     Input('link_downl_dap', 'n_clicks'), #
+     Input('link_downl_dap', 'n_clicks'),  #
      Input('link_downl_imb', 'n_clicks'),
      Input('link_downl', 'n_clicks'),
      Input('Page_1', 'id')],
@@ -1732,19 +1665,13 @@ def toggle_modal(df, dap_click, imb_click, wt_click, pg):
         return True, 'You are ready to click TRADE!', 'success', True
 
 
-
-
-
-
 @app.callback(
     [Output("port_dwnl", "href"),
      Output("port_dwnl", "download"),
-     Output('loading_4', 'children'),],
+     Output('loading_4', 'children'), ],
     [Input('Page_1', 'id')],
 )
 def toggle_modal(n2):
-
-
     user_active = flask.request.cookies.get('custom-auth-session')
     user = user_active
 
@@ -1755,17 +1682,20 @@ def toggle_modal(n2):
     conn.close()
     cur.close()
 
-    constraints = {'Thermal':[accum[0][2],accum[0][2]*app.rampU_thermal,accum[0][2]*app.rampD_thermal, accum[0][2]*app.min_thermal,accum[0][2]*app.max_thermal,0,0,0],
-                   'Wind':[accum[0][3],accum[0][3]*app.rampU_wind,accum[0][3]*app.rampD_wind, app.min_wind,accum[0][3]*app.max_wind,0,0,0],
-                   'Solar':[accum[0][4],accum[0][4]*app.rampU_solar,accum[0][4]*app.rampD_solar, app.min_solar,accum[0][4]*app.max_solar,0,0,0],
-                   'Storage':[accum[0][5],accum[0][5]*app.rampU_storage,accum[0][5]*app.rampD_storage, accum[0][5]*app.min_storage,accum[0][5]*app.max_storage,app.min_SOC_storage,app.max_SOC_storage,app.initial_SOC_storage]
+    constraints = {'Thermal': [accum[0][2], accum[0][2] * app.rampU_thermal, accum[0][2] * app.rampD_thermal,
+                               accum[0][2] * app.min_thermal, accum[0][2] * app.max_thermal, 0, 0, 0],
+                   'Wind': [accum[0][3], accum[0][3] * app.rampU_wind, accum[0][3] * app.rampD_wind, app.min_wind,
+                            accum[0][3] * app.max_wind, 0, 0, 0],
+                   'Solar': [accum[0][4], accum[0][4] * app.rampU_solar, accum[0][4] * app.rampD_solar, app.min_solar,
+                             accum[0][4] * app.max_solar, 0, 0, 0],
+                   'Storage': [accum[0][5], accum[0][5] * app.rampU_storage, accum[0][5] * app.rampD_storage,
+                               accum[0][5] * app.min_storage, accum[0][5] * app.max_storage, app.min_SOC_storage,
+                               app.max_SOC_storage, app.initial_SOC_storage]
                    }
 
-
-    constraints = pd.DataFrame(constraints, index=['Nominal MWh','Ramp-up MWh', 'Ramp-down MWh', 'Min MWh', 'Max MWh', 'max_SOC %', 'min_SOC %','SOC_initial %'])
-
-
-
+    constraints = pd.DataFrame(constraints,
+                               index=['Nominal MWh', 'Ramp-up MWh', 'Ramp-down MWh', 'Min MWh', 'Max MWh', 'max_SOC %',
+                                      'min_SOC %', 'SOC_initial %'])
 
     # if n1:
     csv_string = constraints.to_csv(index=True, header=True, encoding='utf-8')
@@ -1776,3 +1706,6 @@ def toggle_modal(n2):
 
     # else:
     #     raise PreventUpdate
+
+
+

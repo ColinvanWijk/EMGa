@@ -56,7 +56,7 @@ def download_data():
         html.Div([
 
             html.A(
-                dcc.Loading(id='loading_1', color=app.color_3, type='default'),
+                dcc.Loading(id='loading_1', color=app.color_3, type='circle'),
                    id='link_downl',
                    download="",
                    href="",
@@ -78,7 +78,7 @@ def download_irrad():
     I = html.Div([
         html.Div([
 
-            html.A(dcc.Loading(id='loading_3', color=app.color_3, type='default'),
+            html.A(dcc.Loading(id='loading_3', color=app.color_3, type='circle'),
                    id='link_downl3',
                    download="",
                    href="",
@@ -107,7 +107,7 @@ def download_DAP():
     D = html.Div([
         html.Div([
 
-            html.A(dcc.Loading(id='loading_2', color=app.color_3, type='default'),
+            html.A(dcc.Loading(id='loading_2', color=app.color_3, type='circle'),
                    id='link_downl_dap',
                    download="",
                    href="",
@@ -127,7 +127,7 @@ def imb_factors():
     FF = html.Div([
         html.Div([
 
-            html.A(dcc.Loading(id='loading_5', color=app.color_3, type='default'),
+            html.A(dcc.Loading(id='loading_5', color=app.color_3, type='circle'),
                    id='link_downl_imb',
                    download="",
                    href="",
