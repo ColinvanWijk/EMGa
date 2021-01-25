@@ -627,9 +627,11 @@ def display_confirm(contents, filename):
 
         if df is not None:
 
-            df.loc[1:] = df.loc[1:].apply(pd.to_numeric, errors='coerce')
+            df.iloc[1:,1:] = df.iloc[1:,1:].apply(pd.to_numeric, errors='coerce')
 
             df = df.fillna(0)
+
+            df.iloc[1:,3] = 0.0
 
             df_1 = df.to_json()
             dash.callback_context.response.set_cookie('ddf', str(df_1), max_age=7200)

@@ -37,7 +37,7 @@ DATABASE_URL = (url_data)
 
 # user_pwd, user_names = users_info()
 
-port_param = pd.read_csv('https://raw.githubusercontent.com/juan-giraldo-ch/emga_portfolio/main/apps/Portafolio_parameters.csv?token=ANR35YQ7VAAAMSULE5SVNBLAB3MGU',
+port_param = pd.read_csv('https://raw.githubusercontent.com/juan-giraldo-ch/emga_portfolio/main/apps/Portafolio_parameters.csv?token=ANR35YSBS2WQAPZGPB2EDFTADAMEO',
     #r'C:\Users\20194851\Google Drive\Postdoc TUe\Project Serious Game\Dash_tests\EMGA_portfolio\apps\Portafolio_parameters.csv',
     header=0, squeeze=True)
 

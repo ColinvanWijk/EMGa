@@ -248,7 +248,7 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
 
     delta_P, mP = piece_wise(Flex_max, B)
 
-    print(mP[0][1])
+    # print(mP[0][1])
 
 
     model.Flex_max = Param(model.S, initialize=Flex_max, mutable=True)  # Max power
