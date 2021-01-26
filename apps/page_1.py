@@ -348,6 +348,21 @@ layout = html.Div([
                                 href='/assets/Game_manual_portfolio.pdf', target="_blank", ),
                         ], style={'display': 'inline-block', 'textAlign': 'center'}),
 
+                        html.Br(),
+
+                        html.Div([
+                            dbc.Tooltip(
+                                "Donwload Bid File template",
+                                target="bdtemp_dwnl", placement='right', style={'font-size': '0.7vw'}
+                            ),
+                            html.A(
+                                html.Span(
+                                    html.U('Bid File template'),
+                                    style={'font-size': '1.2vw'}, className="normal"),
+                                className="twocolors", id='bdtemp_dwnl', download="",
+                                href='/assets/Bids_0.csv', target="_blank", ),
+                        ], style={'display': 'inline-block', 'textAlign': 'center'}),
+
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
                     # dbc.Col([
                     #     # html.Div([
