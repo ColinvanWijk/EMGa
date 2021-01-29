@@ -82,23 +82,23 @@ app.color_bfig = '#dae1e7'
 ######## Constants ################
 
 app.rampU_thermal = 0.15    # Times nominal power from portfolio
-app.rampD_thermal = -0.15   # Times nominal power from portfolio
+app.rampD_thermal = 0.15   # Times nominal power from portfolio
 app.min_thermal = 0.10  # Times nominal power from portfolio
 app.max_thermal = 1.0  # Times nominal power from portfolio
 app.flex_th = 0.15      # Times submited bid
 
 app.rampU_wind = 10 
-app.rampD_wind = -10
+app.rampD_wind = 10
 app.min_wind = 0.0
 app.max_wind = 1.0
 
 app.rampU_solar = 10
-app.rampD_solar = -10
+app.rampD_solar = 10
 app.min_solar = 0.0
 app.max_solar = 1.0
 
 app.rampU_storage = 0.75
-app.rampD_storage = -0.75
+app.rampD_storage = 0.75
 app.min_storage = -1.0
 app.max_storage = 1.0
 app.min_SOC_storage = 10        # Percentage nominal energy capacity from portfolio

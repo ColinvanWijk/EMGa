@@ -1700,19 +1700,19 @@ def toggle_modal(n2):
     cur.close()
 
     constraints = {'Thermal': [accum[0][2], accum[0][2] * app.rampU_thermal, accum[0][2] * app.rampD_thermal,
-                               accum[0][2] * app.min_thermal, accum[0][2] * app.max_thermal, 0, 0, 0],
+                               accum[0][2] * app.min_thermal, accum[0][2] * app.max_thermal, 0, 0, 0, 0, 0, 0, 0.008342, 12.3883, 382.2391],
                    'Wind': [accum[0][3], accum[0][3] * app.rampU_wind, accum[0][3] * app.rampD_wind, app.min_wind,
-                            accum[0][3] * app.max_wind, 0, 0, 0],
+                            accum[0][3] * app.max_wind, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                    'Solar': [accum[0][4], accum[0][4] * app.rampU_solar, accum[0][4] * app.rampD_solar, app.min_solar,
-                             accum[0][4] * app.max_solar, 0, 0, 0],
+                             accum[0][4] * app.max_solar, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                    'Storage': [accum[0][5], accum[0][5] * app.rampU_storage, accum[0][5] * app.rampD_storage,
-                               accum[0][5] * app.min_storage, accum[0][5] * app.max_storage, app.min_SOC_storage,
-                               app.max_SOC_storage, app.initial_SOC_storage]
+                               accum[0][5] * app.min_storage, accum[0][5] * app.max_storage, 0, app.min_SOC_storage,
+                               app.max_SOC_storage, app.initial_SOC_storage, app.initial_SOC_storage, 95, 0, 0, 0]
                    }
 
     constraints = pd.DataFrame(constraints,
-                               index=['Nominal MWh', 'Ramp-up MWh', 'Ramp-down MWh', 'Min MWh', 'Max MWh', 'max_SOC %',
-                                      'min_SOC %', 'SOC_initial %'])
+                               index=['Nominal MWh', 'Ramp-up MW-h', 'Ramp-down MW-h', 'Min MWh', 'Max MWh', 'P_initial MW', 'min_SOC %',
+                                      'max_SOC %', 'SOC_initial %', 'SOC_final %', 'Efficiency %', 'Cost-square', 'Cost-lineal', 'Cost-constant'])
 
     # if n1:
     csv_string = constraints.to_csv(index=True, header=True, encoding='utf-8')

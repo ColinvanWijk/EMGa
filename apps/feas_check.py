@@ -217,9 +217,13 @@ def redispatch(portf, imbalance, ubpr_pos, ubpr_neg, d, bids):
     bids = bids.set_index('Hour')
 
 
-    a_thermal =  np.min(0.02262 + 0.0005662*constraints.iloc[3, 0] - 0.0003439*constraints.iloc[4, 0] + 4.513e-06*constraints.iloc[3, 0]**2 - 4.356e-06*constraints.iloc[3, 0]*constraints.iloc[4, 0] + 1.184e-06*constraints.iloc[4, 0]**2, 0)
-    b_thermal = np.min(25.81 -2.721*constraints.iloc[3, 0] + 0.5477*constraints.iloc[4, 0] -0.1922*constraints.iloc[3, 0]**2 + 0.133*constraints.iloc[3, 0]*constraints.iloc[4, 0] -0.02102*constraints.iloc[4, 0]**2,0)
-    c_thermal = np.min(25.83 + -26.14*constraints.iloc[3, 0] + 8.122 *constraints.iloc[4, 0] -1.41*constraints.iloc[3, 0]**2 +  0.9836*constraints.iloc[3, 0]*constraints.iloc[4, 0] -0.16*constraints.iloc[4, 0]**2,0)
+
+
+    a_thermal =  0.008342#np.min(0.02262 + 0.0005662*constraints.iloc[3, 0] - 0.0003439*constraints.iloc[4, 0] + 4.513e-06*constraints.iloc[3, 0]**2 - 4.356e-06*constraints.iloc[3, 0]*constraints.iloc[4, 0] + 1.184e-06*constraints.iloc[4, 0]**2, 0)
+    b_thermal = 12.3883#np.min(25.81 -2.721*constraints.iloc[3, 0] + 0.5477*constraints.iloc[4, 0] -0.1922*constraints.iloc[3, 0]**2 + 0.133*constraints.iloc[3, 0]*constraints.iloc[4, 0] -0.02102*constraints.iloc[4, 0]**2,0)
+    c_thermal = 382.2391#np.min(25.83 + -26.14*constraints.iloc[3, 0] + 8.122 *constraints.iloc[4, 0] -1.41*constraints.iloc[3, 0]**2 +  0.9836*constraints.iloc[3, 0]*constraints.iloc[4, 0] -0.16*constraints.iloc[4, 0]**2,0)
+
+    print(a_thermal,b_thermal,c_thermal)
 
     model = ConcreteModel()
 

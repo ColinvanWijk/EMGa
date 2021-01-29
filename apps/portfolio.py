@@ -1181,8 +1181,16 @@ def spider_fig(ess, pv, wt, th, ess_dis, pv_dis, wt_dis, th_dis, nclick):
 
     fig.update_yaxes(automargin=True)
 
-    labels = list(port_param['Technology'])
-    values = [th * (not th_dis) / total, wt * (not wt_dis) / total, pv * (not pv_dis) / total,
+    df = (port_param)
+
+    bad_df = df.index.isin([2])
+
+    param_no_solar = df[~bad_df]
+
+    print((df[~bad_df]))
+
+    labels = list(param_no_solar['Technology'])#list(port_param['Technology'])
+    values = [th * (not th_dis) / total, wt * (not wt_dis) / total, #pv * (not pv_dis) / total,
               ess * (not ess_dis) / total]
 
     pie = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3,
