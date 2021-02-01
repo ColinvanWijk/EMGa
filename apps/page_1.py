@@ -1080,6 +1080,12 @@ def update_download_link(n_clicks):
     # print(players)
     days = cur.fetchone()
     days = days[0]
+
+    cur.execute("SELECT wind FROM portfolio WHERE Player = (%s);", (user_active,))
+    # print(players)
+    nomW = cur.fetchone()
+    nomW = nomW[0]
+
     cur.close()
     conn.close()
 
@@ -1145,10 +1151,15 @@ def update_download_link(n_clicks):
 
         WT_speed['DateTime'] = WT_speed['DateTime'] + datetime.timedelta(delta2 + b2)
 
+        WT_speed['Measured'] = WT_speed['Measured']*nomW
+
         WT_speed_hist = WT_speed[time_mask]
         # print(WT_speed_hist)
         WT_speed_play = WT_speed[~time_mask]
         WT_speed_play = WT_speed_play[0 + 144 * b2:144 * (b2 + 1)]
+
+        WT_speed['Measured'] = WT_speed['Measured']/nomW
+
         ################################
         ################################
 
@@ -1217,8 +1228,8 @@ def update_download_link(n_clicks):
 
         idx = pd.date_range(
             datetime.datetime.strptime(str(WT_speed_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(
-                minutes=10),
-            periods=144, freq='10T')
+                minutes=15),
+            periods=96, freq='15T')
 
         idx_i = pd.date_range(
             datetime.datetime.strptime(str(PV_irradiation_hist.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(
@@ -1386,8 +1397,13 @@ def update_download_link(n_clicks):
 
         WT_speed['DateTime'] = WT_speed['DateTime'] + datetime.timedelta(delta2 + b2)
 
+        WT_speed['Measured'] = WT_speed['Measured']*nomW
+
+
         WT_speed_hist = WT_speed[time_mask]
         # WT_speed_play = WT_speed[~time_mask]
+
+        WT_speed['Measured'] = WT_speed['Measured'] / nomW
 
         ################################
         ################################
@@ -1447,9 +1463,10 @@ def update_download_link(n_clicks):
 
         b = a.tolist()
 
+
         idx = pd.date_range(
-            (datetime.datetime.strptime(str(aa.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(minutes=10)),
-            periods=144, freq='10T')
+            (datetime.datetime.strptime(str(aa.iloc[-1, 0]), '%Y-%m-%d %H:%M:%S') + datetime.timedelta(minutes=15)),
+            periods=96, freq='15T')
         ze = np.zeros((len(idx), 1))
         ndz = pd.DataFrame(ze, index=idx)
         ndz = ndz.reset_index()

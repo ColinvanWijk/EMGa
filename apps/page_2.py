@@ -289,8 +289,8 @@ def display_graph(nome):
         total_bid = (df.iloc[:, 1:5].sum(axis=1) - (phi_plus.iloc[:, 0] + zeta_plus.iloc[:,0] + rho_plus.iloc[:,0]).values +
                      (phi_minus.iloc[:, 0] + zeta_minus.iloc[:,0] + rho_minus.iloc[:,0]).values)
 
-        print(-(phi_plus.iloc[:, 0] + zeta_plus.iloc[:,0] + rho_plus.iloc[:,0]).values +
-                     (phi_minus.iloc[:, 0] + zeta_minus.iloc[:,0] + rho_minus.iloc[:,0]).values)
+        # print(-(phi_plus.iloc[:, 0] + zeta_plus.iloc[:,0] + rho_plus.iloc[:,0]).values +
+        #              (phi_minus.iloc[:, 0] + zeta_minus.iloc[:,0] + rho_minus.iloc[:,0]).values)
         therm_bid = (df.iloc[:, 1])
         storage_bid = (df.iloc[:, 4])
 
@@ -333,7 +333,7 @@ def display_graph(nome):
         figure = go.Figure()
         figure.add_trace(go.Bar(
             name='Bid',
-            x=df[df.columns[0]], y=total_bid,
+            x=df[df.columns[0]], y=df.iloc[:, 1:5].sum(axis=1).values,#,total_bid,
             marker={'color': app.color_3}
         ))
         figure.add_trace(go.Bar(
@@ -380,8 +380,10 @@ def display_graph(nome):
 
         # realp = (fact[fact.columns[b2 + 1]]).array + realp_pv.array
 
-        unb_no_flex = realp.array - total_bid
+        unb_no_flex = realp.array - df.iloc[:, 1:5].sum(axis=1)
         unb = unb_no_flex
+
+        unb_no_flex_test = realp.array - df.iloc[:, 1:5].sum(axis=1)
         # if -flexibility <= unb <= flexibility:
         #     unb = 0.0
 
@@ -396,7 +398,6 @@ def display_graph(nome):
 
         #########################
 
-        print(imb_1)
 
         for t in range(24):
             a = feas_check.redispatch(portf, imb_1, ubpr_pos[ubpr_pos.columns[b2 + 1]] * pr[pr.columns[b2 + 1]], ubpr_neg[ubpr_neg.columns[b2 + 1]] * pr[pr.columns[b2 + 1]], t, df)
@@ -421,9 +422,9 @@ def display_graph(nome):
             if -flexibility[i] <= unb_no_flex[i] <= flexibility[i]:
                 unb[i] = 0.0
             elif unb_no_flex[i] < -flexibility[i]:
-                unb[i] = (realp.iloc[i] + a.flex[0,i].value) - total_bid.iloc[i]
+                unb[i] = (realp.iloc[i] + a.flex[0,i].value)
             elif unb_no_flex[i] > flexibility[i]:
-                unb[i] = realp.iloc[i] - a.flex[0,i].value - total_bid.iloc[i]
+                unb[i] = realp.iloc[i] - a.flex[0,i].value
 
 
 
@@ -439,6 +440,7 @@ def display_graph(nome):
             act_prices = pd.DataFrame(act_prices)
             act_prices_feas = pd.DataFrame(act_prices_feas)
 
+
             # print(test1)
 
 
@@ -452,7 +454,7 @@ def display_graph(nome):
         # df['Pnom'] = float(P_value) * np.ones(24)
 
         figure2 = dict(
-            data=[dict(x=df[df.columns[0]], y=total_bid * pr[pr.columns[b2 + 1]].array, type='bar',
+            data=[dict(x=df[df.columns[0]], y=(df.iloc[:, 1:5].sum(axis=1))* pr[pr.columns[b2 + 1]].array, type='bar',
                        name='Expected',
                        marker=dict(color=app.color_3)),
                   dict(x=df[df.columns[0]], y=(act_prices.iloc[0,:]), type='bar', name='Imb. Income',
@@ -460,12 +462,12 @@ def display_graph(nome):
                        textfont_color=app.color_3,
                        ),
                   dict(x=df[df.columns[0]], y=(act_prices_feas.iloc[0,:].values + (
-                          total_bid * pr[pr.columns[b2 + 1]].array)), type='line', name='Feasible Rev.',
+                          df.iloc[:, 1:5].sum(axis=1) * pr[pr.columns[b2 + 1]].array)), type='line', name='Feasible Rev.',
                        marker=dict(color=app.color_10),
                        textfont_color=app.color_3,
                        ),
                   dict(x=df[df.columns[0]], y=(act_prices.iloc[0,:].values + (
-                          total_bid * pr[pr.columns[b2 + 1]].array)),
+                          df.iloc[:, 1:5].sum(axis=1) * pr[pr.columns[b2 + 1]].array)),
                        type='line', name='Infeasible Rev.',
                        marker=dict(color=app.color_line),
                        textfont_color=app.color_3,
@@ -572,10 +574,12 @@ def display_graph(nome):
 
         flexib = pd.DataFrame(flexib)
 
+
+
         figure4 = {
-            'data': [{'x': df[df.columns[0]], 'y': unb, 'type': 'bar', 'name': 'Imbalance',
+            'data': [{'x': df[df.columns[0]], 'y': unb_no_flex_test, 'type': 'bar', 'name': 'Imbalance',
                       'marker': {'color': app.color_3}}, #
-                     {'x': df[df.columns[0]], 'y': unb.array - abs(tot_inf.iloc[:,0]), 'type': 'bar', 'name': 'Imbalance Feasible',
+                     {'x': df[df.columns[0]], 'y': unb, 'type': 'bar', 'name': 'Imbalance Feasible',
                       'marker': {'color': app.color_10}},
                      {'x': df[df.columns[0]], 'y': (ubpr_pos[ubpr_pos.columns[b2 + 1]]) * pr[pr.columns[b2 + 1]],
                       'type': 'line',

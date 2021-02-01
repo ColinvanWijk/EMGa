@@ -131,8 +131,8 @@ app.initial_SOC_storage = 50    # Percentage nominal energy capacity from portfo
 
 
 
-url_nextW = 'https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/next_wind.csv'
-
+#url_nextW = 'https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/next_wind.csv'
+url_nextW = 'https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/wind_factors_next.csv'
 
 def parser2(x):
     B = (datetime.datetime.strptime(str(x), "%d/%m/%Y %H:%M"))
@@ -150,6 +150,7 @@ A = next_wind.resample('H', on='DateTime').mean()
 aa = pwg.powerG126(A, Number_WT)
 
 a = pd.DataFrame(data=aa, index=A.index)
+
 
 url_irrad = 'https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/hist_irradiation.csv'
 app.PV_irradiation = pd.read_csv(url_irrad, header=0, parse_dates=[0], squeeze=True, date_parser=parser2)
@@ -323,12 +324,14 @@ app.prices = Pr
 # app.prices = pd.read_csv(r'.\Data\prices_20_01_2019.csv')       # Day ahead prices   see (https://www.nordpoolgroup.com/Market-data1/Dayahead/Area-Prices/nl/hourly/?view=table)
 
 # app.real_P = pd.read_csv(r'.\Real_injection.csv')
-app.real_P = a1/1000 # MW#app.WF_inj / 1000
+app.real_P = a1 # MW#app.WF_inj / 1000
+
 
 
 # ---- SHARED DATA ----- #
 # url_hist = 'https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/hist_data.csv'
-url_hist = 'https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/windSpeed_2020.csv'
+#url_hist = 'https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/windSpeed_2020.csv'
+url_hist = 'https://raw.githubusercontent.com/juan-giraldo-ch/Serious_Game/master/wind_2018_2020.csv'
 app.wind_data = pd.read_csv(url_hist)
 
 
