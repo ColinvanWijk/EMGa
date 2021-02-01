@@ -113,15 +113,15 @@ def feasibility_check(username, portf, bids):
         if t > 0 and (i==0 or i==3):
             return (model.Enom[i, t] - model.Enom[i, t - 1] - model.zeta_plus[i, t] <= model.Rampup[i])
         else:
-            return (model.Enom[i, t] - model.zeta_plus[i, t] <= model.Pmax[i]) # Error es por esto
+            return (model.zeta_plus[i, t] == 0.0) # Error es por esto
 
     model.Ramp_max_power = Constraint(model.S, model.T, rule=Ramp_max_power_rule)
 
     def Ramp_min_power_rule(model, i, t):
         if t > 0 and (i==0 or i==3):
-            return (model.Enom[i, t] - model.Enom[i, t - 1] + model.zeta_minus[i, t] >= model.Rampdown[i])
+            return (model.Enom[i, t] - model.Enom[i, t - 1] + model.zeta_minus[i, t] >= -model.Rampdown[i])
         else:
-            return (model.Enom[i, t] + model.zeta_minus[i, t] >= model.Pmin[i])
+            return (model.zeta_minus[i, t] == 0.0)
 
     model.Ramp_min_power = Constraint(model.S, model.T, rule=Ramp_min_power_rule)
 
@@ -189,7 +189,7 @@ def feasibility_check(username, portf, bids):
            total_inf[t] = total_inf[t] - model.phi_plus[i,t].value + model.phi_minus[i,t].value - model.zeta_plus[i,t].value \
                         + model.zeta_minus[i,t].value - model.rho_plus[i,t].value*model.Pnom[i].value + model.rho_minus[i,t].value*model.Pnom[i].value
            phi_plus[t] = phi_plus[t] + model.phi_plus[i,t].value
-           phi_minus[t] = phi_minus[t] + model.phi_plus[i,t].value
+           phi_minus[t] = phi_minus[t] + model.phi_minus[i,t].value
            zeta_plus[t] = zeta_plus[t] + model.zeta_plus[i,t].value
            zeta_minus[t] = zeta_minus[t] + model.zeta_minus[i,t].value
            rho_plus[t] = model.rho_plus[i, t].value * model.Pnom[i].value

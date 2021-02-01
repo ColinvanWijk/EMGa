@@ -282,6 +282,7 @@ def display_graph(nome):
         ##################
         feas, tot_inf, phi_plus, phi_minus, zeta_plus, zeta_minus, rho_plus, rho_minus = feas_check.feasibility_check(user_active, portf, df)
 
+        print('tot_inf = {}'.format(zeta_minus))
 
         ##################
 
@@ -338,7 +339,7 @@ def display_graph(nome):
         ))
         figure.add_trace(go.Bar(
             name='Actual',
-            x=df[df.columns[0]], y=realp,
+            x=df[df.columns[0]], y=realp ,
             error_y=dict(type='data', array=flexibility,
                          color=app.color_10),
             marker={'color': app.color_bar2}
@@ -415,33 +416,35 @@ def display_graph(nome):
 
         test1 = unb.array - abs(tot_inf.iloc[:,0])
 
+        print(cost)
+
 
         for i in range(len(realp)):
+        #
+        #     print(a.flex[0,i].value)
+        #     if -flexibility[i] <= unb_no_flex[i] <= flexibility[i]:
+        #         unb[i] = 0.0
+        #     elif unb_no_flex[i] < -flexibility[i]:
+        #         unb[i] = (realp.iloc[i] + a.flex[0,i].value)
+        #     elif unb_no_flex[i] > flexibility[i]:
+        #         unb[i] = realp.iloc[i] - a.flex[0,i].value
 
-
-            if -flexibility[i] <= unb_no_flex[i] <= flexibility[i]:
-                unb[i] = 0.0
-            elif unb_no_flex[i] < -flexibility[i]:
-                unb[i] = (realp.iloc[i] + a.flex[0,i].value)
-            elif unb_no_flex[i] > flexibility[i]:
-                unb[i] = realp.iloc[i] - a.flex[0,i].value
 
 
 
 
             if unb[i] >= 0.0:
                 act_prices[i] = (unb[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])
-                act_prices_feas[i] = (unb.array[i] - abs(tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1]) - (cost.iloc[i])
+                act_prices_feas[i] = (imb_1[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1]) - (cost.iloc[i])
 
             else:
                 act_prices[i] = unb[i] * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1])
-                act_prices_feas[i] = (unb.array[i] + abs(tot_inf.iloc[i,0])) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) - (cost.iloc[i])
+                act_prices_feas[i] = (imb_1[i]) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) - (cost.iloc[i])
 
             act_prices = pd.DataFrame(act_prices)
             act_prices_feas = pd.DataFrame(act_prices_feas)
 
-
-            # print(test1)
+        # print(test1)
 
 
 
@@ -461,8 +464,9 @@ def display_graph(nome):
                        marker=dict(color=app.color_bar2),
                        textfont_color=app.color_3,
                        ),
-                  dict(x=df[df.columns[0]], y=(act_prices_feas.iloc[0,:].values + (
-                          df.iloc[:, 1:5].sum(axis=1) * pr[pr.columns[b2 + 1]].array)), type='line', name='Feasible Rev.',
+                  dict(x=df[df.columns[0]], y=(act_prices_feas.iloc[0,:].values +
+                                               (df.iloc[:, 1:5].sum(axis=1))* pr[pr.columns[b2 + 1]].array),
+                       type='line', name='Feasible Rev.',
                        marker=dict(color=app.color_10),
                        textfont_color=app.color_3,
                        ),
@@ -579,7 +583,7 @@ def display_graph(nome):
         figure4 = {
             'data': [{'x': df[df.columns[0]], 'y': unb_no_flex_test, 'type': 'bar', 'name': 'Imbalance',
                       'marker': {'color': app.color_3}}, #
-                     {'x': df[df.columns[0]], 'y': unb, 'type': 'bar', 'name': 'Imbalance Feasible',
+                     {'x': df[df.columns[0]], 'y': imb_1, 'type': 'bar', 'name': 'Imbalance Feasible',
                       'marker': {'color': app.color_10}},
                      {'x': df[df.columns[0]], 'y': (ubpr_pos[ubpr_pos.columns[b2 + 1]]) * pr[pr.columns[b2 + 1]],
                       'type': 'line',
