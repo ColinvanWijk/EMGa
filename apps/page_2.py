@@ -472,7 +472,7 @@ def display_graph(nome):
                        ),
                   dict(x=df[df.columns[0]], y=(act_prices.iloc[0,:].values + (
                           df.iloc[:, 1:5].sum(axis=1) * pr[pr.columns[b2 + 1]].array)),
-                       type='line', name='Infeasible Rev.',
+                       type='line', name='Perfect Forecast Rev.',
                        marker=dict(color=app.color_line),
                        textfont_color=app.color_3,
                        ),

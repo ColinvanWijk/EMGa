@@ -1256,7 +1256,7 @@ def update_download_link(n_clicks):
         ndz_dap = ndz_dap.rename(columns={'index': 'Date', 0: 'Day-ahead Price [EUR/MWh]'})
 
         dff2 = wf_power.append((ndz), ignore_index=True)
-        dff2 = dff2.rename(columns={'DateTime': 'Date', 0: 'speed'})
+        dff2 = dff2.rename(columns={'DateTime': 'Date', 0: 'P_avg'})
 
         dff_dap = dap_day.append((ndz_dap), ignore_index=True)
         # dff_dap = dff_dap.rename(columns={'DateTime': 'date', 'Cleared [EUR/MWh]': 'Cleared'})
@@ -1471,12 +1471,12 @@ def update_download_link(n_clicks):
         ndz = pd.DataFrame(ze, index=idx)
         ndz = ndz.reset_index()
 
-        ndz = ndz.rename(columns={'index': 'date', 0: 'speed'})
+        ndz = ndz.rename(columns={'index': 'date', 0: 'P_avg'})
         wf_power = json.dumps(b, default=json_util.default)
 
         dff = p_wf_power
         dff = dff.reset_index()
-        dff = dff.rename(columns={'DateTime': 'date', 'Measured': 'speed'})
+        dff = dff.rename(columns={'DateTime': 'date', 'Measured': 'P_avg'})
         dff = dff.drop('index', 1)
 
         dff1 = dff.append((ndz), ignore_index=True)
@@ -1489,7 +1489,7 @@ def update_download_link(n_clicks):
         df_dap = pd.DataFrame({'': tn, 'DAP': aa.iloc[:, 1]})
         dap_file = 'DAP_{}.csv'.format((datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
-        nfile = 'windSpeed_{}.csv'.format(
+        nfile = 'windPowerNormalized_{}.csv'.format(
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
         imbfile = 'imbFactors_{}.csv'.format(

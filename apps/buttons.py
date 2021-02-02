@@ -65,7 +65,7 @@ def download_data():
         ]),  #
 
     dbc.Tooltip(
-        "Historical 10-minute wind speed data.",
+        "Historical 15-minute normalized power data.",
         target="link_downl", placement='right', style={'font-size': '0.7vw'}
     ),
 
