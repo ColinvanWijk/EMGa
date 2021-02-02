@@ -1151,14 +1151,14 @@ def update_download_link(n_clicks):
 
         WT_speed['DateTime'] = WT_speed['DateTime'] + datetime.timedelta(delta2 + b2)
 
-        WT_speed['Measured'] = WT_speed['Measured']*nomW
+        WT_speed['Measured'] = WT_speed['Measured']
 
         WT_speed_hist = WT_speed[time_mask]
         # print(WT_speed_hist)
         WT_speed_play = WT_speed[~time_mask]
         WT_speed_play = WT_speed_play[0 + 144 * b2:144 * (b2 + 1)]
 
-        WT_speed['Measured'] = WT_speed['Measured']/nomW
+        WT_speed['Measured'] = WT_speed['Measured']
 
         ################################
         ################################
@@ -1305,7 +1305,7 @@ def update_download_link(n_clicks):
         csv_string_dap = dff_dap.to_csv(index=False, header=True, encoding='utf-8')
         csv_string_dap = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_dap)
         # print(dff)
-        nfile = 'windSpeed_{}.csv'.format(
+        nfile = 'windPowerNormalized_{}.csv'.format(
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
         imbfile = 'imbFactors_{}.csv'.format(
@@ -1397,13 +1397,13 @@ def update_download_link(n_clicks):
 
         WT_speed['DateTime'] = WT_speed['DateTime'] + datetime.timedelta(delta2 + b2)
 
-        WT_speed['Measured'] = WT_speed['Measured']*nomW
+        WT_speed['Measured'] = WT_speed['Measured']
 
 
         WT_speed_hist = WT_speed[time_mask]
         # WT_speed_play = WT_speed[~time_mask]
 
-        WT_speed['Measured'] = WT_speed['Measured'] / nomW
+        WT_speed['Measured'] = WT_speed['Measured']
 
         ################################
         ################################
