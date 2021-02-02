@@ -1729,7 +1729,7 @@ def toggle_modal(n2):
 
     constraints = pd.DataFrame(constraints,
                                index=['Nominal MWh', 'Ramp-up MW-h', 'Ramp-down MW-h', 'Min MWh', 'Max MWh', 'P_initial MW', 'min_SOC %',
-                                      'max_SOC %', 'SOC_initial %', 'SOC_final %', 'Efficiency %', 'Cost-square', 'Cost-lineal', 'Cost-constant'])
+                                      'max_SOC %', 'SOC_initial %', 'SOC_final %', 'Efficiency %', 'Cost-square', 'Cost-linear', 'Cost-constant'])
 
     # if n1:
     csv_string = constraints.to_csv(index=True, header=True, encoding='utf-8')
