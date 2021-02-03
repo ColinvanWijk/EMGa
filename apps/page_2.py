@@ -257,7 +257,7 @@ def display_graph(nome):
     df = pd.DataFrame.from_dict(df, orient='columns')
     # P_value = app.Pvalue
     clicks = 1
-    accum = [0]
+    accum = float(flask.request.cookies.get('accum_val'))
     accumA = float(flask.request.cookies.get('accum_val'))
 
     if (df.empty or len(df.columns) < 1 or clicks is None or P_value == 0):
@@ -340,8 +340,8 @@ def display_graph(nome):
         figure.add_trace(go.Bar(
             name='Actual',
             x=df[df.columns[0]], y=realp ,
-            error_y=dict(type='data', array=flexibility,
-                         color=app.color_10),
+            # error_y=dict(type='data', array=flexibility,
+            #              color=app.color_10),
             marker={'color': app.color_bar2}
             # error_y=dict(type='data', array=[0.5, 1, 2])
         ))
@@ -392,7 +392,7 @@ def display_graph(nome):
         act_prices = np.zeros((len(realp), 1))
         act_prices_feas = np.zeros((len(realp), 1))
 
-        imb_1 = unb.array - abs(tot_inf.iloc[:,0])
+        imb_1 = unb.array - (tot_inf.iloc[:,0])
 
         flexib = np.zeros((len(realp),1))
         cost = np.zeros((len(realp),1))
@@ -433,7 +433,7 @@ def display_graph(nome):
 
 
 
-            if unb[i] >= 0.0:
+            if imb_1[i] >= 0.0:
                 act_prices[i] = (unb[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])
                 act_prices_feas[i] = (imb_1[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1]) - (cost.iloc[i])
 
@@ -458,20 +458,19 @@ def display_graph(nome):
 
         figure2 = dict(
             data=[dict(x=df[df.columns[0]], y=(df.iloc[:, 1:5].sum(axis=1))* pr[pr.columns[b2 + 1]].array, type='bar',
-                       name='Expected',
+                       name='Expected Rev.',
                        marker=dict(color=app.color_3)),
-                  dict(x=df[df.columns[0]], y=(act_prices.iloc[0,:]), type='bar', name='Imb. Income',
-                       marker=dict(color=app.color_bar2),
-                       textfont_color=app.color_3,
-                       ),
+                  # dict(x=df[df.columns[0]], y=(act_prices.iloc[0,:]), type='bar', name='Imb. Income',
+                  #      marker=dict(color=app.color_bar2),
+                  #      textfont_color=app.color_3,
+                  #      ),
                   dict(x=df[df.columns[0]], y=(act_prices_feas.iloc[0,:].values +
-                                               (df.iloc[:, 1:5].sum(axis=1))* pr[pr.columns[b2 + 1]].array),
+                                               (df.iloc[:, 1:5].sum(axis=1)) * pr[pr.columns[b2 + 1]].array),
                        type='line', name='Feasible Rev.',
                        marker=dict(color=app.color_10),
                        textfont_color=app.color_3,
                        ),
-                  dict(x=df[df.columns[0]], y=(act_prices.iloc[0,:].values + (
-                          df.iloc[:, 1:5].sum(axis=1) * pr[pr.columns[b2 + 1]].array)),
+                  dict(x=df[df.columns[0]], y=(realp * pr[pr.columns[b2 + 1]].array),
                        type='line', name='Perfect Forecast Rev.',
                        marker=dict(color=app.color_line),
                        textfont_color=app.color_3,
@@ -508,28 +507,35 @@ def display_graph(nome):
         # act_prices = pd.DataFrame(act_prices)
         # print(act_prices)
         AA = act_prices.iloc[0,:].values + (
-                total_bid * pr[pr.columns[
+                df.iloc[:, 1:5].sum(axis=1) * pr[pr.columns[
             b2 + 1]].array)  # (total_bid * (pr[pr.columns[b2 + 1]]).array + (act_prices[act_prices.columns[0]]).array)
 
         A = accum
         accum = np.cumsum(AA)
         exp_accum = np.cumsum(realp * pr[pr.columns[b2 + 1]])
-        dash.callback_context.response.set_cookie('accum_1', str(accum.iloc[-1]), max_age=7200)
 
         BB = act_prices_feas.iloc[0,:].values + (
                           total_bid * pr[pr.columns[b2 + 1]].array)
         accum_feas = np.cumsum(BB)
+        #
+        # dash.callback_context.response.set_cookie('accum_1', str(accum_feas.iloc[-1]), max_age=7200)
 
-        if abs(accum.iloc[-1] - A[-1]) > 0:
-            accumA = accumA + accum.iloc[-1]
+
+        if abs(accum_feas.iloc[-1] - A) > 0:
+            accumA = accumA + accum_feas.iloc[-1]
             cookie_exp = float(flask.request.cookies.get('exp_accum'))
 
             cookie_exp = cookie_exp + exp_accum.iloc[-1]
 
             dash.callback_context.response.set_cookie('exp_accum', str(cookie_exp), max_age=7200)
 
+            # accum_feas = np.cumsum(BB)
+
+            dash.callback_context.response.set_cookie('accum_1', str(accum_feas.iloc[-1]), max_age=7200)
+
         else:
             accumA = accumA
+            accum_feas = accum_feas
             # cookie_exp = cookie_exp
 
         # co = set_cookie('acc_cookie', app.accum) # colocar en return
