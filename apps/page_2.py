@@ -257,7 +257,8 @@ def display_graph(nome):
     df = pd.DataFrame.from_dict(df, orient='columns')
     # P_value = app.Pvalue
     clicks = 1
-    accum = float(flask.request.cookies.get('accum_val'))
+    accum_sesion = (flask.request.cookies.get('bar_acum'))
+    accum_sesion = json.loads(accum_sesion)
     accumA = float(flask.request.cookies.get('accum_val'))
 
     if (df.empty or len(df.columns) < 1 or clicks is None or P_value == 0):
@@ -282,7 +283,7 @@ def display_graph(nome):
         ##################
         feas, tot_inf, phi_plus, phi_minus, zeta_plus, zeta_minus, rho_plus, rho_minus = feas_check.feasibility_check(user_active, portf, df)
 
-        print('tot_inf = {}'.format(zeta_minus))
+        # print('tot_inf = {}'.format(zeta_minus))
 
         ##################
 
@@ -416,7 +417,7 @@ def display_graph(nome):
 
         test1 = unb.array - abs(tot_inf.iloc[:,0])
 
-        print(cost)
+        # print(cost)
 
 
         for i in range(len(realp)):
@@ -507,21 +508,31 @@ def display_graph(nome):
         # act_prices = pd.DataFrame(act_prices)
         # print(act_prices)
         AA = act_prices.iloc[0,:].values + (
-                df.iloc[:, 1:5].sum(axis=1) * pr[pr.columns[
+                (df.iloc[:, 1:5].sum(axis=1)) * pr[pr.columns[
             b2 + 1]].array)  # (total_bid * (pr[pr.columns[b2 + 1]]).array + (act_prices[act_prices.columns[0]]).array)
 
-        A = accum
         accum = np.cumsum(AA)
+
         exp_accum = np.cumsum(realp * pr[pr.columns[b2 + 1]])
 
         BB = act_prices_feas.iloc[0,:].values + (
                           total_bid * pr[pr.columns[b2 + 1]].array)
         accum_feas = np.cumsum(BB)
+
+        A = accum_feas.iloc[-1]
+
         #
         # dash.callback_context.response.set_cookie('accum_1', str(accum_feas.iloc[-1]), max_age=7200)
 
+        print('Aqui esta A={}'.format(A))
+        print('Aqui esta accumA={}'.format(accum_sesion[-1]))
 
-        if abs(accum_feas.iloc[-1] - A) > 0:
+
+
+
+        if abs(float(accum_sesion[-1]) - A) > 0:
+            print('NO Se repitio')
+
             accumA = accumA + accum_feas.iloc[-1]
             cookie_exp = float(flask.request.cookies.get('exp_accum'))
 
@@ -529,13 +540,24 @@ def display_graph(nome):
 
             dash.callback_context.response.set_cookie('exp_accum', str(cookie_exp), max_age=7200)
 
-            # accum_feas = np.cumsum(BB)
 
             dash.callback_context.response.set_cookie('accum_1', str(accum_feas.iloc[-1]), max_age=7200)
 
+            accum_sesion.append(str(accum_feas.iloc[-1]))
+            bar_acum = list(dict.fromkeys(accum_sesion))
+
+            x = json.dumps(bar_acum)
+            dash.callback_context.response.set_cookie('bar_acum', (x), max_age=7200)
+
+            # dash.callback_context.response.set_cookie('bar_acum', str(accum_feas.iloc[-1]), max_age=7200)
+
+
+
         else:
+
+            print('Se repitio')
+
             accumA = accumA
-            accum_feas = accum_feas
             # cookie_exp = cookie_exp
 
         # co = set_cookie('acc_cookie', app.accum) # colocar en return

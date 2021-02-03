@@ -578,12 +578,12 @@ def display_confirm(day, page):
         x = json.dumps(accufig1)
         dash.callback_context.response.set_cookie('accufig', (x), max_age=7200)
 
-        bar_acum = (json.loads((flask.request.cookies.get('bar_acum'))))
-        bar_acum.append(accum_1)
-        bar_acum = list(dict.fromkeys(bar_acum))
-
-        x = json.dumps(bar_acum)
-        dash.callback_context.response.set_cookie('bar_acum', (x), max_age=7200)
+        # bar_acum = (json.loads((flask.request.cookies.get('bar_acum'))))
+        # bar_acum.append(accum_1)
+        # bar_acum = list(dict.fromkeys(bar_acum))
+        #
+        # x = json.dumps(bar_acum)
+        # dash.callback_context.response.set_cookie('bar_acum', (x), max_age=7200)
 
         rate_accum1.append(accufig1[-1] / b2)
         rate_accum1 = list(dict.fromkeys(rate_accum1))
@@ -1063,7 +1063,9 @@ def score_fig(nome):
                Output('loading_1', 'children'),
                Output('loading_2', 'children'),
                Output('loading_3', 'children'),
-               Output('loading_5', 'children'), ],
+               Output('loading_5', 'children'),
+               Output('popover-target', 'className'),
+               Output('popover-target','disabled')],
               [Input('Counter_day', 'children') ],
               # [State('wind_hist', 'data'),
               #  # State('irrad_hist', 'data')
@@ -1315,7 +1317,7 @@ def update_download_link(n_clicks):
             (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
         return csv_string, '', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False, \
-               False, '', imbfile, csv_string_imbF, button1, button2, button3, button5
+               False, '', imbfile, csv_string_imbF, button1, button2, button3, button5, 'button-primary', False
 
 
     else:
@@ -1509,7 +1511,8 @@ def update_download_link(n_clicks):
         csv_string_irrad = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string_irrad)
 
         return csv_string, ' Download Historical Data', nfile, dap_file, csv_string_dap, sifile, csv_string_irrad, False, \
-               False, ' Download Day Ahead Prices', imbfile, csv_string_imbF, button1, button2, button3, button5
+               False, ' Download Day Ahead Prices', imbfile, csv_string_imbF, button1, button2, button3, button5,\
+               'button-primary', False
 
 
 ## Leaderboard popover

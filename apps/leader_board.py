@@ -25,8 +25,8 @@ def L_table():
                 target="popover-target", placement='right', style={'font-size': '0.7vw'}
             ),
             html.Button(
-                "Leaderboard", id="popover-target", className='button-primary',
-                style={'font-size': '1.0vw', 'height': '2vw', 'width': '100%', 'textAlign': 'center'}
+                "Leaderboard", id="popover-target", type='submit',
+                style={'font-size': '1.0vw', 'height': '2vw', 'width': '100%', 'textAlign': 'center'},className='disabled',disabled=True,
             ),
             dbc.Popover(
                 [
