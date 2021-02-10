@@ -249,6 +249,12 @@ def display_graph(nome):
     days_play1_i = 1  # only for one day
 
 
+
+
+
+
+
+
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cur = conn.cursor()
     cur.execute("SELECT * FROM portfolio WHERE Player = (%s);", (user_active,))
@@ -257,6 +263,11 @@ def display_graph(nome):
     wind_p_nom = accum[0][3]
     pv_p_nom = accum[0][4]
     storage_p_nom = accum[0][5]
+
+
+    days = b2
+
+
 
     conn.close()
     cur.close()
@@ -311,7 +322,7 @@ def display_graph(nome):
 
         csv_string = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string)
         nfile = 'results_{}.csv'.format(
-            (datetime.datetime.now() + datetime.timedelta(days=b2 )).strftime("%Y-%m-%d"))
+            (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
 
         return figure, {'display': 'none'}, figure2, {'display': 'none'}, figure3, {'display': 'none'}, figure4, {
@@ -708,7 +719,7 @@ def display_graph(nome):
         csv_string = all.to_csv(index=True, header=True, encoding='utf-8')
         csv_string = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string)
         nfile = 'results_{}.csv'.format(
-            (datetime.datetime.now() + datetime.timedelta(days=b2 - 1)).strftime("%Y-%m-%d"))
+            (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d"))
 
         return figure, {'display': 'inline-block', 'width': '95%', 'height': '95%'}, \
                figure2, {'display': 'inline-block', 'width': '95%', 'height': '95%'}, \
