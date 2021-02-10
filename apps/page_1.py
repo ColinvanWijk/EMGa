@@ -1258,7 +1258,7 @@ def update_download_link(n_clicks):
         ndz_dap = ndz_dap.rename(columns={'index': 'Date', 0: 'Day-ahead Price [EUR/MWh]'})
 
         dff2 = wf_power.append((ndz), ignore_index=True)
-        dff2 = dff2.rename(columns={'DateTime': 'Date', 0: 'P_avg'})
+        dff2 = dff2.rename(columns={'DateTime': 'Date', 'Measured': 'P_avg'})
 
         dff_dap = dap_day.append((ndz_dap), ignore_index=True)
         # dff_dap = dff_dap.rename(columns={'DateTime': 'date', 'Cleared [EUR/MWh]': 'Cleared'})

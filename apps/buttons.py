@@ -40,7 +40,7 @@ def next_day():
     B = html.Div([
         html.Div([
             dcc.Link(
-                dbc.Button(size='lg', color="success", outline=True, children='Go to Next Day\'s Bid', id='nextD_b',
+                html.Button(className='button-primary', children='Go to Next Day\'s Bid', id='nextD_b',
                            disabled=False, style={
                         # 'marginTop':'165%',
                         'marginBottom': '5%', 'font-size': '0.7vw', }),

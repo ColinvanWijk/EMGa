@@ -17,6 +17,8 @@ import psycopg2
 import os  # Importing OS functions
 import power_renew_generators as pwg
 import datetime
+from six.moves.urllib.parse import quote
+
 
 from pyomo.environ import *
 import matplotlib.pyplot as plt
@@ -117,6 +119,10 @@ layout = html.Div([
                 [
                     dbc.Col([
 
+
+
+
+
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
 
                     dbc.Col([
@@ -129,6 +135,18 @@ layout = html.Div([
             dbc.Row(
                 [
                     dbc.Col([
+
+                        html.Div([
+                            dbc.Tooltip(
+                                "Download the obtained results of your trade",
+                                target="data_dwnl", placement='right', style={'font-size': '0.7vw'}
+                            ),
+                            html.A(
+                                html.Span(
+                                    html.U('Download results data'),
+                                    style={'font-size': '1.3vw'}, className="normal"),
+                                className="twocolors", id='data_dwnl', download="", href="", target="_blank", ),
+                        ], style={'display': 'inline-block', 'textAlign': 'center'}),
 
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
 
@@ -165,10 +183,11 @@ layout = html.Div([
                Output('graph_accum_revenue', 'figure'),
                Output('datatable_graph_accum_revenue', 'style'),
                Output('graph_unbal', 'figure'),
-               Output('datatable_graph_unbal', 'style')
-
+               Output('datatable_graph_unbal', 'style'),
+                Output('data_dwnl', 'href'),
+               Output('data_dwnl','download'),
                ],
-              [Input('Page_2', 'id')],
+              [Input('Page_2', 'id'),],
               # [State('irrad_hist', 'data')]
               )
 def display_graph(nome):
@@ -180,6 +199,22 @@ def display_graph(nome):
 
     user_active = flask.request.cookies.get('custom-auth-session')
 
+
+
+    ##############3
+    aa = (flask.request.cookies.get('ddf'))
+
+    # s1 = json.dumps(df)
+    df = json.loads(aa)
+
+    df = pd.DataFrame.from_dict(df, orient='columns')
+
+    # all =
+    # if n1:
+    # csv_string = df.iloc[:, 1:5].sum(axis=1).to_csv(index=True, header=True, encoding='utf-8')
+    # csv_string = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string)
+    # nfile = 'results_{}.csv'.format((datetime.datetime.now() + datetime.timedelta(days=b2-1)).strftime("%Y-%m-%d"))
+    ##############
 
 
     # feas, tot_inf = feas_check.feasibility_check(user_active)
@@ -261,6 +296,8 @@ def display_graph(nome):
     accum_sesion = json.loads(accum_sesion)
     accumA = float(flask.request.cookies.get('accum_val'))
 
+
+
     if (df.empty or len(df.columns) < 1 or clicks is None or P_value == 0):
         figure = {
             'data': [{
@@ -269,11 +306,22 @@ def display_graph(nome):
                 'type': 'bar'
             }]
         }
+
+        csv_string = df.iloc[:, 1:5].sum(axis=1).to_csv(index=True, header=True, encoding='utf-8')
+
+        csv_string = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string)
+        nfile = 'results_{}.csv'.format(
+            (datetime.datetime.now() + datetime.timedelta(days=b2 )).strftime("%Y-%m-%d"))
+
+
         return figure, {'display': 'none'}, figure2, {'display': 'none'}, figure3, {'display': 'none'}, figure4, {
-            'display': 'none'}
+            'display': 'none'}, csv_string, nfile
 
 
     else:
+
+
+
         pr = pd.DataFrame(app.prices)
         fact = pd.DataFrame(app.real_P) * wind_p_nom
 
@@ -524,14 +572,14 @@ def display_graph(nome):
         #
         # dash.callback_context.response.set_cookie('accum_1', str(accum_feas.iloc[-1]), max_age=7200)
 
-        print('Aqui esta A={}'.format(A))
-        print('Aqui esta accumA={}'.format(accum_sesion[-1]))
+        # print('Aqui esta A={}'.format(A))
+        # print('Aqui esta accumA={}'.format(accum_sesion[-1]))
 
 
 
 
         if abs(float(accum_sesion[-1]) - A) > 0:
-            print('NO Se repitio')
+            # print('NO Se repitio')
 
             accumA = accumA + accum_feas.iloc[-1]
             cookie_exp = float(flask.request.cookies.get('exp_accum'))
@@ -555,7 +603,7 @@ def display_graph(nome):
 
         else:
 
-            print('Se repitio')
+            # print('Se repitio')
 
             accumA = accumA
             # cookie_exp = cookie_exp
@@ -643,11 +691,30 @@ def display_graph(nome):
         }
 
         ########################################################################
+        all = df.iloc[:, 1:5].sum(axis=1)
+
+        all = pd.DataFrame(all)
+        # print(total_bid)
+        all.insert(1, "Feasible bid", total_bid.array, True)
+        all.insert(2, "Real generation", realp.array, True)
+        all.insert(3, "Feasible imbalance", imb_1.array, True)
+        all.insert(4, "Feasible revenue", act_prices_feas.iloc[0,:].values +
+                                               (df.iloc[:, 1:5].sum(axis=1)) * pr[pr.columns[b2 + 1]].array, True)
+        all.insert(5, "Perfect forecast revenue", (realp.array * pr[pr.columns[b2 + 1]].array), True)
+
+        # print(all)
+
+
+        csv_string = all.to_csv(index=True, header=True, encoding='utf-8')
+        csv_string = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string)
+        nfile = 'results_{}.csv'.format(
+            (datetime.datetime.now() + datetime.timedelta(days=b2 - 1)).strftime("%Y-%m-%d"))
 
         return figure, {'display': 'inline-block', 'width': '95%', 'height': '95%'}, \
                figure2, {'display': 'inline-block', 'width': '95%', 'height': '95%'}, \
                figure3, {'display': 'inline-block', 'width': '95%', 'height': '95%'}, \
-               figure4, {'display': 'inline-block', 'width': '95%', 'height': '95%'}
+               figure4, {'display': 'inline-block', 'width': '95%', 'height': '95%'},\
+               csv_string, nfile
 
 
 
@@ -688,38 +755,7 @@ def button_2(clicks):
 
         return False
 
-# @app.callback(Output('url', 'pathname'),
-#               [Input('graph_unbal', 'figure')])
-# def day_limit(input):
-#
-#     b2p = float(flask.request.cookies.get('b2p'))
-#
-#     ############################
-#     ############################
-#
-#     user_active = flask.request.cookies.get('custom-auth-session')
-#
-#     print(user_active)
-#
-#     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-#
-#     cur = conn.cursor()
-#
-#     cur.execute("SELECT days FROM Leader_board WHERE Player = (%s);", (user_active,))
-#     # print(players)
-#     days = cur.fetchone()
-#     cur.close()
-#     conn.close()
-#
-#     # if len(days):
-#     print('OK')
-#
-#     day = days[0]
-#     print(day)
-#     print(len(app.WF_real_power) / 96)
-#
-#     if day > len(app.WF_real_power) / 96:
-#         return '/Page_end'
-#
+
+
 # ############################
 # ############################
