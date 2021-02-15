@@ -14,12 +14,13 @@ def submit_b():
     A = html.Div([
         html.Div([
             # dcc.Link(html.Button('3. Submit', id='button', disabled=True, style={'color':app.color_4})),
-            dcc.Link(
+            # dcc.Link(
                 html.Button('TRADE', id='button', type='submit',
                             style={'font-size': '1.2vw'}, className='disabled',disabled=True),
+
                 # dbc.Button(size='md', color="success", outline=True, children='TRADE', id='button', disabled=True,
                 #            style={'font-size': '1.2vw'}),
-                href='/Page_2'),
+                #      id='trade_but'),#/Page_2
             html.Div(id='Button_data',
                      children='',
                      # style={'color': app.color_8, 'font-size': '22px', 'textAlign': 'center'}
@@ -202,118 +203,6 @@ def help_drag():
         dbc.Modal(
             [
                 dbc.ModalHeader("Guidelines"),
-                dbc.ModalBody([
-                    html.P(
-                      dcc.Markdown(
-                          "***Game Instructions***:"
-                      )
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            "**1)** You can download the updated historical data for your wind farm,"
-                            "  the day-ahead prices (updated for each trading day), and the imbalance factors."
-                            " Also, you can check the operational limits of your portfolio."
-                    # "Download past wind speed records by clicking on the `Download Historical Wind Data` "
-                    #         " button. Also, get the day-ahead prices from the `Download Day Ahead Prices` button."
-                        ),
-                    ),
-                    html.P(
-                        dcc.Markdown(
-                            "**2)** Use a forecasting technique to estimate the total hourly energy of your portfolio"
-                            " for the next trading day. Use the forecasted values to obtain a **`bid file`** using a "
-                            "decision making technique."
-                        )
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            ">***Obs.*** You can download a template file in the ***`Toolbox`*** section."
-                        )
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            "**3)** Upload and submit your **`bid file`**, containing the expected hourly energy bids obtained"
-                            " in step 2 separated by energy source. Your file must have extensions .csv or .xls"
-                            " and should contain **`25`** rows and **`5`** columns in total."
-                            " You can drag the file or select it from your computer. Check the uploaded data file in the table."
-                        )
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            "**4)** Click on the **`TRADE`** button to submit your energy bids and continue playing."
-                        ),
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            "**5)** You will be redirected to the performance page, where you can review your day"
-                            " performance by comparing your actual revenue and the maximum revenue (perfect forecast)."
-                        )
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            "**6)** After checking your revenue, you can continue to the next trading day "
-                            "by clicking on the button **`Go to Next Day's Bid`**."
-                        )
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            "**7)** Once you click on the **`Go to Next Day's Bid`** button, you will be redirected back to"
-                            " the main page. To continue with the game, repeat this guide from step 2. "
-                        )
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            "**8)** The game finishes when there are no more available trading days. You will be"
-                            " immediately redirected to the summary page where you can see your final stats. When all"
-                            " players have finished the game, the **WINNER** will be the player that appears in the"
-                            " first position of the **`Leaderboard`**."
-                        )
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            "---"
-                        )
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            "***Leaderboard***:"
-                        )
-                    ),
-
-                    html.P(
-                        dcc.Markdown(
-                            "**1)** You can check the **leaderboard** by clicking on the **`LEADERBOARD`** button."
-                        )
-                    ),
-
-                  html.P(
-                      dcc.Markdown(
-                          "**2)** The **leaderboard** displays your accumulated revenue, "
-                          " the number of days you have played, and your **`Rate`**."
-                      )
-                  ),
-
-                html.P(
-                    dcc.Markdown(
-                        "**3)** The **`Rate`** is the ratio between your **`Accumulated Revenue`**/**`Played days`**. "
-                        " The **`Rate`** is the measurement for the game's ranking... "
-                        "**So keep it as high as possible!!**"
-                    )
-                )
-
-
-            ]
-
-                ),
                 dbc.ModalFooter(
                     html.Button("Let's Play!", id="close", className='button-primary',)
                 ),

@@ -482,6 +482,10 @@ layout = html.Div([
     # ---------- BID > THAN NOMINAL P ----------- #
     messages.mesag_nom(),
 
+    # ---------- Confirmation message - ----------#
+
+    messages.mesag_confirm_trade(),
+
     ##############################################
 
     ################### - STORE HIST DATA - ###########################
@@ -945,10 +949,17 @@ def bid_bigger_nominal(contents, P_value, clicks, filename):
             df = df.fillna(0)
             max_P = df[df.columns[1]].max()
 
-            if max_P > float(total):
+            if max_P > float(total) and clicks is None:
                 return True
             else:
                 return False
+
+        # if clicks is None:
+        #     return False, False, ''
+        # else:
+        #     return False, True,
+
+
 
 
 #################################################
@@ -972,6 +983,32 @@ def table_format(contents, filename):
                 return True
         else:
             return True
+
+@app.callback(
+    Output("modal_conf_trade", "is_open"),
+    [Input("ok_button", "n_clicks"),
+     Input('button', 'n_clicks')],
+    [State("modal_conf_trade", "is_open")],
+)
+def toggle_modal(n1, click, is_open):
+    if click or n1:
+        return not is_open
+    return is_open
+
+# @app.callback(Output('trade_but', 'href'),
+#               [Input('confirm_trade','submit_n_clicks'),
+#                Input('confirm_trade','cancel_n_clicks')]
+#               )
+# def confirm_trade(click_ok,click_cancel):
+#     if not click_ok or ok_button:
+#         return '/Page_2'
+#
+#     if click_cancel is not None:
+#         return '/Page_1'
+
+# ,
+#                Input('confirm_trade','submit_n_clicks')
+
 
 
 ## UPDATE SCORE FIGURE
