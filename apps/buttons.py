@@ -40,13 +40,11 @@ def submit_b():
 def next_day():
     B = html.Div([
         html.Div([
-            dcc.Link(
-                html.Button(className='button-primary', children='Go to Next Day\'s Bid', id='nextD_b',
-                           disabled=False, style={
-                        # 'marginTop':'165%',
-                        'marginBottom': '5%', 'font-size': '0.7vw', }),
-                id='link_b2', href='/Page_1'),
-        ], style={'textAlign': 'center', 'width': '100%', 'height': '100%'}),
+            # dcc.Link(
+                html.Button(type='submit',className='disabled', children='Go to Next Day\'s Bid', id='nextD_b',
+                            disabled=True, style={'font-size': '0.7vw', }),
+                # id='link_b2', href='/Page_1'),
+        ], style={'textAlign': 'center'}),
 
     ])
     return B

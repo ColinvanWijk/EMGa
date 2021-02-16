@@ -555,6 +555,13 @@ def display_confirm(day, page):
 
     day = days[0]
 
+    # if day >= app.play_days:  # len(app.WF_real_power) / 96:
+    #     rep = flask.redirect('/Page_end')
+    #
+    #     # rep.set_cookie('custom-auth-session', username, max_age=7200)  # expires in 2 hours
+    #
+    #     return rep
+
     # if day == len(app.WF_real_power) / 96:
 
     dash.callback_context.response.set_cookie('b2', str(day), max_age=7200)

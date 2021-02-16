@@ -1187,7 +1187,7 @@ def spider_fig(ess, pv, wt, th, ess_dis, pv_dis, wt_dis, th_dis, nclick):
 
     param_no_solar = df[~bad_df]
 
-    print((df[~bad_df]))
+    # print((df[~bad_df]))
 
     labels = list(param_no_solar['Technology'])#list(port_param['Technology'])
     values = [th * (not th_dis) / total, wt * (not wt_dis) / total, #pv * (not pv_dis) / total,

@@ -68,4 +68,62 @@ def mesag_confirm_trade():
     ##############################################
     return BB
 
+def mesag_confirm_nextday():
+    # ---------- BID > THAN NOMINAL P ----------- #
+    CC = html.Div([
 
+        dbc.Modal(
+            [
+                dbc.ModalHeader("Confirm Next Day"),
+                dbc.ModalBody([
+
+                    html.P(
+                        dcc.Markdown(
+                            "Have you downloaded the day's results?"
+                        )
+                    ),
+
+                    html.Br(),
+
+                    html.P(
+                        dcc.Markdown(
+                            "Downloading the results is not possible after you leave this page."
+                        )
+                    ),
+
+                    html.Br(),
+
+                    html.P(
+                        dcc.Markdown(
+                            "Are you sure you want to continue?"
+                        )
+                    ),
+
+                ]
+                ),
+                dbc.ModalFooter([
+                    html.Div([
+                        dcc.Link(html.Button("continue!", id="continue_button", className='button-primary', ),
+                                 id='link_continue', href='/Page_1'),
+                    ], style={'textAlign': 'left'}),
+
+                    html.Div([
+                        dcc.Link(html.Button("Cancel", id="cancel_button_2", className='button-primary', ),
+                                 id='link_cancel', href='/Page_2')
+                    ], style={'textAlign': 'right'})
+
+
+
+                ],style={'textAlign': 'center'}
+                ),
+            ], id="modal_continue", backdrop="static", scrollable=True, centered=True, style={'textAlign': 'center'}
+        ),
+
+    ])
+
+    #     dcc.ConfirmDialog(
+    #     id='confirm_trade',
+    #     message='CAUTION!  Are you sure you are ready to submit your trade?',
+    # )
+    ##############################################
+    return CC
