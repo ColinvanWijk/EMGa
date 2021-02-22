@@ -201,6 +201,113 @@ def help_drag():
         dbc.Modal(
             [
                 dbc.ModalHeader("Guidelines"),
+                dbc.ModalBody([
+                    html.P(
+                        dcc.Markdown(
+                            "***Game Instructions***:"
+                        )
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "**1)** Download historical data from normalized wind generation by clicking on the `Download Historical Wind Data` "
+                            " button. Also, get the day-ahead prices from the `Download Day Ahead Prices` button. Finally, get the imbalance factors"
+                            "for the next day. **Obs.** This is a known parameter"
+                        ),
+                    ),
+                    html.P(
+                        dcc.Markdown(
+                            "**2)** Generate a .csv file containing your expected hourly energy bids. The file structure "
+                            " must have 24 rows and 5 columns. You can find a template in your **Toolbox**"
+                        )
+                    ),
+
+                    # html.P(
+                    #     dcc.Markdown(
+                    #         ">***Obs.*** The **FIRST** column represents the time periods, i.e., \{t0, t1, ..., t23\},"
+                    #         "   while the **SECOND** column should contain the energy bid."
+                    #     )
+                    # ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "**3)** Check the uploaded data file in the table below."
+                        )
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "**4)** In case your data is OK, click on the `TRADE` button to "
+                            " continue and check your revenue."
+                        ),
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "**5)** Four figures will be displayed where you can compare your"
+                            " uploaded bid with the actual energy production, check hourly energy mismatches, "
+                            " your revenue per hour, and the day accumulated revenue."
+                        )
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "**6)** After checking your revenue, you can continue to the next trading day "
+                            "by clicking on the button `Go to Next Day's Bid`."
+                        )
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "**7)** You must repeat steps **1)**--**6)** for a predefined number of days (time horizon). "
+                            " You can leave your current session anytime by logging out clicking on the `LOGOUT` button."
+                            " Don't worry, your process **will not be lost**."
+                        )
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "**8)** Once you have completed the time horizon, you will not be able to make any other bid. "
+                            " You can always re-login using your username/password and review your current position in the Leaderboard."
+                        )
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "---"
+                        )
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "***Leaderboard***:"
+                        )
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "**1)** You can check the **leaderboard** by clicking on the `LEADERBOARD` button."
+                        )
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "**2)** The **leaderboard** displays your accumulated revenue, "
+                            " the number of days you have played, and your `Rate`."
+                        )
+                    ),
+
+                    html.P(
+                        dcc.Markdown(
+                            "**3)** The `Rate` is the ratio between your `Accumulated Revenue`/`Played days`. "
+                            " The `Rate` is the measurement for the game's ranking... "
+                            "**So keep it as high as possible!!**"
+                        )
+                    )
+
+                ]
+
+                ),
                 dbc.ModalFooter(
                     html.Button("Let's Play!", id="close", className='button-primary',)
                 ),
