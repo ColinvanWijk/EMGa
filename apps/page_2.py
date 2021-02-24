@@ -517,12 +517,12 @@ def display_graph(nome):
 
 
             if imb_1[i] >= 0.0:
-                act_prices[i] = (unb[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])
-                act_prices_feas[i] = (imb_1[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1]) # - (cost.iloc[i])
+                act_prices[i] = (unb[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])- 0.2*(cost.iloc[i])
+                act_prices_feas[i] = (imb_1[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1]) - 0.5*(cost.iloc[i])
 
             else:
-                act_prices[i] = unb[i] * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1])
-                act_prices_feas[i] = (imb_1[i]) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) #- (cost.iloc[i])
+                act_prices[i] = unb[i] * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1])- 0.2*(cost.iloc[i])
+                act_prices_feas[i] = (imb_1[i]) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) - 0.5*(cost.iloc[i])
 
             act_prices = pd.DataFrame(act_prices)
             act_prices_feas = pd.DataFrame(act_prices_feas)
