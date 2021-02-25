@@ -36,7 +36,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
 
 
 app.database_url = 'Server' #'Local'#' # 'Server'
-play_days = 15 # Define the number of days to be played
+play_days = 20 # Define the number of days to be played
 
 Number_WT = 1
 

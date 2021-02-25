@@ -1241,7 +1241,7 @@ def spider_fig(ess, pv, wt, th, ess_dis, pv_dis, wt_dis, th_dis, nclick):
     [Input('slider_ess', 'value'),
      Input('slider_ess', 'disabled')])
 def update_output(value, dis):
-    return 'Energy Capacity {} '.format(value * float(not dis)) + 'MWh'
+    return 'Energy Capacity {} '.format(value * float(not dis)) + 'MW'
 
 
 @app.callback(
