@@ -44,7 +44,7 @@ port_param = pd.read_csv('https://raw.githubusercontent.com/juan-giraldo-ch/Seri
 port_param_num = port_param.replace({'High': 3 / 3, 'Medium': 2 / 3, 'Low': 1 / 3})
 
 
-# print('Here: {}'.format(port_param.iloc[0][7]))
+print('Here: {}'.format(port_param.iloc[0][7]))
 
 layout = html.Div([
 
@@ -168,7 +168,7 @@ layout = html.Div([
                                                                         id='slider_th',
                                                                         min=port_param.iloc[0][7] * 0.2,
                                                                         max=port_param.iloc[0][7],
-                                                                        step=port_param.iloc[0][7] * 0.2,
+                                                                        step=port_param.iloc[0][7] * 0.1,
                                                                         value=0.0,
                                                                         marks={
                                                                             2: {'label': str(
@@ -394,7 +394,7 @@ layout = html.Div([
                                                         html.Div([
                                                             dcc.Slider(
                                                                 id='slider_wt',
-                                                                min=port_param.iloc[1][7] * 0.1,
+                                                                min=port_param.iloc[0][7] * 1.0,
                                                                 max=port_param.iloc[1][7],
                                                                 step=port_param.iloc[1][7] * 0.1,
                                                                 value=0.0,
@@ -1241,7 +1241,7 @@ def spider_fig(ess, pv, wt, th, ess_dis, pv_dis, wt_dis, th_dis, nclick):
     [Input('slider_ess', 'value'),
      Input('slider_ess', 'disabled')])
 def update_output(value, dis):
-    return 'Energy Capacity {} '.format(value * float(not dis)) + 'MW'
+    return 'Power Capacity {} '.format(value * float(not dis)) + 'MW'
 
 
 @app.callback(
