@@ -43,6 +43,9 @@ port_param = pd.read_csv('https://raw.githubusercontent.com/juan-giraldo-ch/Seri
 
 port_param_num = port_param.replace({'High': 3 / 3, 'Medium': 2 / 3, 'Low': 1 / 3})
 
+
+# print('Here: {}'.format(port_param.iloc[0][7]))
+
 layout = html.Div([
 
     # ---------- SCORE BOARD ----------- #
