@@ -57,10 +57,9 @@ def new_user():
 
             dcc.RadioItems(
                 options=[
-                    {'label': ' First time playing?  ', 'value': 1},
-                    {'label': ' Forgotten credentials?  ', 'value': 2},
-
-                ], id="regist", style={'color': app.color_3},
+                    {'label': ' First time playing?  ', 'value': 1, 'disabled':True},
+                    {'label': ' Forgotten credentials?  ', 'value': 2, 'disabled':True},
+                ], id="regist", style={'color': app.color_3, },
                 labelStyle={'display': 'inline-block'}
             ),
             # html.Button('New User?', id="regist", type='submit', className='button-primary',
