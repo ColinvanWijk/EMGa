@@ -503,6 +503,32 @@ hr {
     color: #32e0c4;
     text-decoration: none;
     }
+	
+
+.twocolors_inv span.red {
+    color: #000;
+    text-decoration: none;
+    }
+.twocolors_inv:hover span.red {
+    color: #FF0000;
+    text-decoration: none;
+    }
+.twocolors_inv span.blue {
+    color: #000;
+    text-decoration: none;
+    }
+.twocolors_inv:hover span.blue {
+    color: #0000FF;
+    text-decoration: none;
+    }
+.twocolors_inv span.normal {
+    color: #142850;
+    text-decoration: none;
+    }
+.twocolors_inv:hover span.normal {
+    color: #00909e;
+    text-decoration: none;
+    }
 
 
 /* Media Queries

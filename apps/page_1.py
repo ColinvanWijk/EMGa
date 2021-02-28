@@ -363,6 +363,22 @@ layout = html.Div([
                                 href='/assets/Bids_0.csv', target="_blank", ),
                         ], style={'display': 'inline-block', 'textAlign': 'center'}),
 
+                        # html.Br(),
+                        #
+                        # html.Div([
+                        #     dbc.Tooltip(
+                        #         "Download Tutorial I",
+                        #         target="goto_tutI", placement='right', style={'font-size': '0.7vw'}
+                        #     ),
+                        #     html.A(
+                        #         html.Span(
+                        #             html.U('Download - Tutorial Login'),
+                        #             style={'font-size': '1.2vw'}, className="normal"),
+                        #         className="twocolors", id='goto_tutI', download="",
+                        #         href='https://surfdrive.surf.nl/files/index.php/s/sp5gGuQvygkec7h/download',
+                        #         target="_blank", ),
+                        # ], style={'display': 'inline-block', 'textAlign': 'left'}),
+
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
                     # dbc.Col([
                     #     # html.Div([
@@ -431,12 +447,78 @@ layout = html.Div([
             dbc.Row(
                 [
                     dbc.Col([
+html.B('Tutorials',
+                           style={'font-size': '1.7vw', 'color': app.color_4, 'width': '100%', 'height': '1.5vw'}),
+
+                    html.Br(),
+
+                    html.Div([
+                        dbc.Tooltip(
+                            "Download Tutorial I",
+                            target="goto_tutI", placement='right', style={'font-size': '0.7vw'}
+                        ),
+                        html.A(
+                            html.Span(
+                                html.U('Tutorial Login'),
+                                style={'font-size': '1.0vw'}, className="normal"),
+                            className="twocolors", id='goto_tutI', download="",
+                            href='https://surfdrive.surf.nl/files/index.php/s/sp5gGuQvygkec7h/download',
+                            target="_blank", ),
+                    ], style={'display': 'inline-block', 'textAlign': 'left'}),
+
+                    html.Br(),
+
+                    html.Div([
+                        dbc.Tooltip(
+                            "Download Tutorial II",
+                            target="goto_tutII", placement='right', style={'font-size': '0.7vw'}
+                        ),
+                        html.A(
+                            html.Span(
+                                html.U('Tutorial Trade Page'),
+                                style={'font-size': '1.0vw'}, className="normal"),
+                            className="twocolors", id='goto_tutII', download="",
+                            href='https://surfdrive.surf.nl/files/index.php/s/TFy5BffYq5x9LbG/download',
+                            target="_blank", ),
+                    ], style={'display': 'inline-block', 'textAlign': 'left'}),
+
+                        html.Br(),
+
+                        html.Div([
+                            dbc.Tooltip(
+                                "Download Tutorial III",
+                                target="goto_tutIII", placement='right', style={'font-size': '0.7vw'}
+                            ),
+                            html.A(
+                                html.Span(
+                                    html.U('Tutorial Results Page'),
+                                    style={'font-size': '1.0vw'}, className="normal"),
+                                className="twocolors", id='goto_tutIII', download="",
+                                href='https://surfdrive.surf.nl/files/index.php/s/VJQP1JsI2yIgLYN/download',
+                                target="_blank", ),
+                        ], style={'display': 'inline-block', 'textAlign': 'left'}),
+
+                        html.Br(),
+
+                        html.Div([
+                            dbc.Tooltip(
+                                "Download Tutorial IV",
+                                target="goto_tutIV", placement='right', style={'font-size': '0.7vw'}
+                            ),
+                            html.A(
+                                html.Span(
+                                    html.U('Tutorial Jup. Notebook'),
+                                    style={'font-size': '1.0vw'}, className="normal"),
+                                className="twocolors", id='goto_tutIV', download="",
+                                href='https://surfdrive.surf.nl/files/index.php/s/cwC1fPiPqTD8mxF/download',
+                                target="_blank", ),
+                        ], style={'display': 'inline-block', 'textAlign': 'left'}),
 
                     ], width=2, lg=2, md=2, sm=2, style={'backgroundColor': app.color_3, 'textAlign': 'center'}),
 
                     dbc.Col([
                     ], width=10, lg=10, md=10, sm=10),
-                ], style={'height': '1vw'},
+                ], style={'height': '10vw'},
             ),
 
             dbc.Row([

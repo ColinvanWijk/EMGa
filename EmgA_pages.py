@@ -96,7 +96,50 @@ login_form = html.Div([
                     # ],width=6, lg=6, md=6, sm=6
                     # ),
                 ], justify="center",
-            )
+            ),
+
+            html.Br(),
+            html.Br(),
+
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
+                            html.Div([
+                                dbc.Tooltip(
+                                    "Donwload the game manual",
+                                    target="manual_dwnl", placement='right', style={'font-size': '0.7vw'}
+                                ),
+
+                                html.A(
+                                    html.Span(
+                                        html.U('Game Manual'),
+                                        style={'font-size': '1.0vw'}, className="normal"),
+                                    className="twocolors_inv", id='manual_dwnl', download="",
+                                    href='/assets/Game_manual_portfolio.pdf', target="_blank", ),
+                            ], style={'display': 'inline-block', 'textAlign': 'left'}),
+
+                            html.Br(),
+
+                            html.Div([
+                                dbc.Tooltip(
+                                    "Download Tutorial I",
+                                    target="goto_tutI", placement='right', style={'font-size': '0.7vw'}
+                                ),
+                                html.A(
+                                    html.Span(
+                                        html.U('Download - Tutorial Login'),
+                                        style={'font-size': '1.0vw'}, className="normal"),
+                                    className="twocolors_inv", id='goto_tutI', download="",
+                                    href='https://surfdrive.surf.nl/files/index.php/s/sp5gGuQvygkec7h/download', target="_blank", ),
+                            ], style={'display': 'inline-block', 'textAlign': 'left'}),
+
+                        ], width=12, lg=12, md=12, sm=12
+                    ),
+
+
+                ], justify="center",
+            ),
 
         ], style={'height': '50vw', 'textAlign': 'center', 'vertical-align': 'bottom'}),
     ], fluid=True),
