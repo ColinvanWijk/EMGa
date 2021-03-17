@@ -365,7 +365,7 @@ def display_graph(nome):
         ##################
         feas, tot_inf, phi_plus, phi_minus, zeta_plus, zeta_minus, rho_plus, rho_minus = feas_check.feasibility_check(user_active, portf, df)
 
-        # print('tot_inf = {}'.format(zeta_minus))
+        print('tot_inf_bater = {}'.format(tot_inf))
 
         ##################
 
@@ -409,7 +409,7 @@ def display_graph(nome):
         # print((-(phi_plus.iloc[:, 0] + zeta_plus.iloc[:,0] + rho_plus.iloc[:,0]) + (phi_minus.iloc[:, 0] + zeta_minus.iloc[:,0] + rho_minus.iloc[:,0]))[0])
         # print((df.iloc[:, 1:5].sum(axis=1)))
 
-        realp = (fact[fact.columns[b2 + 1]]) + realp_pv.array + therm_bid.array + storage_bid.array # * float(P_value)
+        realp = (fact[fact.columns[b2 + 1]]) + realp_pv.array + therm_bid.array + (storage_bid.array- phi_plus.iloc[:,0] + phi_minus.iloc[:,0]) # * float(P_value)
 
 
         flexibility = portf[0][2]*app.flex_th*np.ones(np.shape(therm_bid))#therm_bid * flex_th / 100 + storage_bid * flex_storage / 100
@@ -475,7 +475,9 @@ def display_graph(nome):
         act_prices = np.zeros((len(realp), 1))
         act_prices_feas = np.zeros((len(realp), 1))
 
-        imb_1 = unb.array - (tot_inf.iloc[:,0])
+        # print('unb = {}'.format(unb))
+
+        imb_1 = unb #- (tot_inf.iloc[:,0])
 
         flexib = np.zeros((len(realp),1))
         cost = np.zeros((len(realp),1))
@@ -517,12 +519,12 @@ def display_graph(nome):
 
 
             if imb_1[i] >= 0.0:
-                act_prices[i] = (unb[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])- 0.2*(cost.iloc[i])
-                act_prices_feas[i] = (imb_1[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1]) - 0.5*(cost.iloc[i])
+                act_prices[i] = (unb[i]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1])-(cost.iloc[i])
+                act_prices_feas[i] = (imb_1[i] - rho_plus.iloc[i,0] - rho_minus.iloc[i,0]) * pr.iloc[i, b2 + 1] * (ubpr_pos.iloc[i, b2 + 1]) - (cost.iloc[i])
 
             else:
-                act_prices[i] = unb[i] * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1])- 0.2*(cost.iloc[i])
-                act_prices_feas[i] = (imb_1[i]) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) - 0.5*(cost.iloc[i])
+                act_prices[i] = unb[i] * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1])- (cost.iloc[i])
+                act_prices_feas[i] = (imb_1[i] - rho_plus.iloc[i,0]- rho_minus.iloc[i,0]) * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1]) - (cost.iloc[i])
 
             act_prices = pd.DataFrame(act_prices)
             act_prices_feas = pd.DataFrame(act_prices_feas)
@@ -538,6 +540,8 @@ def display_graph(nome):
             #     act_prices_no_flex[i] = unb_no_flex[i] * pr.iloc[i, b2 + 1] * (ubpr_neg.iloc[i, b2 + 1])
             # act_prices = pd.DataFrame(act_prices)
         # df['Pnom'] = float(P_value) * np.ones(24)
+
+        # print('feas_rev = {}'.format(df.iloc[:, 1:5].sum(axis=1)))
 
         figure2 = dict(
             data=[dict(x=df[df.columns[0]], y=(df.iloc[:, 1:5].sum(axis=1))* pr[pr.columns[b2 + 1]].array, type='bar',
@@ -686,6 +690,7 @@ def display_graph(nome):
         # imb_1 = unb.array - tot_inf.iloc[:, 0]
 
         flexib = pd.DataFrame(flexib)
+
 
 
 
