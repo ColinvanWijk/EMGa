@@ -365,7 +365,7 @@ def display_graph(nome):
         ##################
         feas, tot_inf, phi_plus, phi_minus, zeta_plus, zeta_minus, rho_plus, rho_minus = feas_check.feasibility_check(user_active, portf, df)
 
-        print('tot_inf_bater = {}'.format(tot_inf))
+        # print('tot_inf_bater = {}'.format(tot_inf))
 
         ##################
 

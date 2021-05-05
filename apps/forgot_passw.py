@@ -9,7 +9,7 @@ import dash_html_components as html
 
 
 def send_email(players,receiver_email):
-    print('OK')
+    # print('OK')
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "emgatue@gmail.com"  # Enter your address
